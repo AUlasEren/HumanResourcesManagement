@@ -11,5 +11,6 @@ public class AuthServiceApplication {
         SpringApplication.run(AuthServiceApplication.class);
         System.out.println("asdad");
         System.out.println("asdad2222");
+        System.out.println("asdad3333");
     }
 }
