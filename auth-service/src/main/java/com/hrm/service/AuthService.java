@@ -1,6 +1,7 @@
 package com.hrm.service;
 
 import com.hrm.dto.request.NewRegisterRequestDto;
+import com.hrm.dto.response.RegisterResponseDto;
 import com.hrm.exception.AuthServiceException;
 import com.hrm.exception.ErrorType;
 import com.hrm.mapper.IAuthMapper;
@@ -12,6 +13,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class AuthService extends ServiceManager<Auth, Long> {
@@ -26,16 +29,14 @@ public class AuthService extends ServiceManager<Auth, Long> {
 
     }
 
-    public Boolean register(NewRegisterRequestDto dto) {
-        Auth auth = IAuthMapper.INSTANCE.toAuth(dto);
-        auth.setActivationCode(CodeGenerator.generateCode());
-        if(!dto.getPassword().equals(dto.getRePassword())){
-            throw new AuthServiceException(ErrorType.PASSWORD_UNMATCH);
-        }
-        if (authRepository.findOptionalByEmail(dto.getEmail()).get()) {
+    public RegisterResponseDto register(NewRegisterRequestDto dto) {
+        Optional<Auth> auth = authRepository.findOptionalByEmail(dto.getEmail());
+        if (auth.isPresent())
             throw new AuthServiceException(ErrorType.EMAIL_DUPLICATE);
-        }
-        save(auth);
-        return true;
+        if (!dto.getPassword().equals(dto.getRePassword()))
+            throw new AuthServiceException(ErrorType.PASSWORD_UNMATCH);
+        Auth auth2 = IAuthMapper.INSTANCE.toAuth(dto);
+        authRepository.save(auth2);
+        return IAuthMapper.INSTANCE.toRegisterResponseDto(auth2);
     }
 }
