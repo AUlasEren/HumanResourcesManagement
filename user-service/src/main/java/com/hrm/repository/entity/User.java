@@ -7,11 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import nonapi.io.github.classgraph.json.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
+
 import java.time.LocalDate;
 
 @Data
@@ -19,7 +18,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Entity
+@Document
 public class User extends BaseEntity{
     @Id
     private  String id;

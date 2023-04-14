@@ -3,7 +3,7 @@ package com.hrm.utility;
 import com.hrm.repository.entity.BaseEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
