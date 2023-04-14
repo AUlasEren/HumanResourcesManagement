@@ -3,6 +3,7 @@ package com.hrm.controller;
 import static com.hrm.constants.ApiUrls.*;
 
 import com.hrm.dto.request.NewCreateUserRequestDto;
+import com.hrm.dto.request.UserUpdateRequestDto;
 import com.hrm.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,5 +22,9 @@ public class UserController {
     @PostMapping(CREATE)
     public ResponseEntity<Boolean> createUser(@RequestBody NewCreateUserRequestDto dto){
         return ResponseEntity.ok(userService.createUser(dto));
+    }
+    @PostMapping(UPDATE)
+    public ResponseEntity<Boolean> updateUser(@RequestBody UserUpdateRequestDto dto){
+        return ResponseEntity.ok(userService.update(dto));
     }
 }

@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserUpdateRequestDto {
-
+    private String id;
     private String image;
     private String address;
     private String phoneNumber;
