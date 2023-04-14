@@ -30,13 +30,12 @@ public class AuthService extends ServiceManager<Auth, Long> {
     }
 
     public RegisterResponseDto register(NewRegisterRequestDto dto) {
-        Optional<Auth> auth = authRepository.findOptionalByEmail(dto.getEmail());
-        if (auth.isPresent())
+        if (authRepository.findOptionalByEmail(dto.getEmail()).isPresent())
             throw new AuthServiceException(ErrorType.EMAIL_DUPLICATE);
         if (!dto.getPassword().equals(dto.getRePassword()))
             throw new AuthServiceException(ErrorType.PASSWORD_UNMATCH);
-        Auth auth2 = IAuthMapper.INSTANCE.toAuth(dto);
-        authRepository.save(auth2);
-        return IAuthMapper.INSTANCE.toRegisterResponseDto(auth2);
+        Auth auth = IAuthMapper.INSTANCE.toAuth(dto);
+        authRepository.save(auth);
+        return IAuthMapper.INSTANCE.toRegisterResponseDto(auth);
     }
 }
