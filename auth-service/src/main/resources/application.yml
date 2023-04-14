@@ -2,7 +2,6 @@ server:
   port: 7071
 
 spring:
-
 #  security:
 #    name: hrm
 #    password: 123
@@ -18,7 +17,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/HRMAUTHDB
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 #  rabbitmq:
 #    host: localhost
 #    port: 5672
