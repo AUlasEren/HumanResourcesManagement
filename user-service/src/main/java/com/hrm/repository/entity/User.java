@@ -2,10 +2,7 @@ package com.hrm.repository.entity;
 
 import com.hrm.repository.enums.ERole;
 import com.hrm.repository.enums.EStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import nonapi.io.github.classgraph.json.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -34,6 +31,7 @@ public class User extends BaseEntity{
     private String email;
     private String address;
     private String phoneNumber;
-    private EStatus status;
+    @Builder.Default
+    private EStatus status=EStatus.ACTIVE;
     //auth DAN KAYIT OLDKTAN SONRA BU BILGILERIN YAZILACAGI SAYFAYA YONLENDIR.
 }

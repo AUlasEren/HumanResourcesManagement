@@ -8,6 +8,7 @@ import com.hrm.exception.UserServiceException;
 import com.hrm.mapper.IUserMapper;
 import com.hrm.repository.IUserRepository;
 import com.hrm.repository.entity.User;
+import com.hrm.repository.enums.EStatus;
 import com.hrm.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,15 @@ public class UserService extends ServiceManager<User,String> {
         user.get().setPhoneNumber(dto.getPhoneNumber());
         update(user.get());
     return true;
+    }
+
+    public Boolean delete(String id){
+        Optional<User> user = findById(id);
+        if(user.isEmpty())
+            throw new UserServiceException(ErrorType.ID_NOT_FOUND);
+        user.get().setStatus(EStatus.DELETED);
+        update(user.get());
+        return true;
     }
 
 }
