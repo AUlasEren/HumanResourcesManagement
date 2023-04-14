@@ -32,4 +32,17 @@ public class UserService extends ServiceManager<User,String> {
       save(IUserMapper.INSTANCE.toUser(dto));
       return true;
     }
+
+    public Boolean update(UserUpdateRequestDto dto){
+        Optional<User> user = userRepository.findById(dto.getId());
+        if(user.isEmpty()){
+            throw new UserServiceException(ErrorType.ID_NOT_FOUND);
+        }
+        user.get().setImage(dto.getImage());
+        user.get().setAddress(dto.getAddress());
+        user.get().setPhoneNumber(dto.getPhoneNumber());
+        update(user.get());
+    return true;
+    }
+
 }
