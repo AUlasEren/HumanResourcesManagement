@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface IUserRepository extends MongoRepository<User,String> {
-Optional<User> findOptionalByUserIdentificationNumber(Long identificationNumber);
+public interface IUserRepository extends MongoRepository<User, String> {
+    Optional<User> findOptionalByIdentificationNumber(Long identificationNumber);
 }

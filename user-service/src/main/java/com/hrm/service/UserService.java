@@ -26,8 +26,8 @@ public class UserService extends ServiceManager<User,String> {
 
 
     public Boolean createUser(NewCreateUserRequestDto dto) {
-      if (userRepository.findOptionalByUserIdentificationNumber(dto.getIdentificationNumber())
-                .isEmpty())
+      if (userRepository.findOptionalByIdentificationNumber(dto.getIdentificationNumber())
+                .isPresent())
           throw new UserServiceException(ErrorType.IDENTIFICATIONNUMBER_DUPLICATE);
       save(IUserMapper.INSTANCE.toUser(dto));
       return true;
