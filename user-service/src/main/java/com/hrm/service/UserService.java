@@ -3,6 +3,8 @@ package com.hrm.service;
 
 import com.hrm.dto.request.NewCreateUserRequestDto;
 import com.hrm.dto.request.UserUpdateRequestDto;
+import com.hrm.dto.response.UserDetailResponseDto;
+import com.hrm.dto.response.UserSummaryResponseDto;
 import com.hrm.exception.ErrorType;
 import com.hrm.exception.UserServiceException;
 import com.hrm.mapper.IUserMapper;
@@ -63,5 +65,21 @@ public class UserService extends ServiceManager<User, String> {
         } catch (Exception e) {
             throw new UserServiceException(ErrorType.USER_NOT_CREATED);
         }
+    }
+
+    public UserSummaryResponseDto getSummaryInfo(String id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserServiceException(ErrorType.ID_NOT_FOUND);
+        }
+        return IUserMapper.INSTANCE.toUserSummaryResponseDto(user.get());
+    }
+
+    public UserDetailResponseDto getDetailInfo(String id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserServiceException(ErrorType.ID_NOT_FOUND);
+        }
+        return IUserMapper.INSTANCE.toUserDetailResponseDto(user.get());
     }
 }

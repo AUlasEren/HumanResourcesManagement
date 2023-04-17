@@ -4,6 +4,8 @@ import static com.hrm.constants.ApiUrls.*;
 
 import com.hrm.dto.request.NewCreateUserRequestDto;
 import com.hrm.dto.request.UserUpdateRequestDto;
+import com.hrm.dto.response.UserDetailResponseDto;
+import com.hrm.dto.response.UserSummaryResponseDto;
 import com.hrm.repository.entity.User;
 import com.hrm.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +36,14 @@ public class UserController {
         return ResponseEntity.ok(userService.delete(id));
     }
 
-
+    @GetMapping(SUMMARYINFO)
+    public ResponseEntity<UserSummaryResponseDto> summaryInfo(@RequestParam String id){
+        return ResponseEntity.ok(userService.getSummaryInfo(id));
+    }
+    @GetMapping(DETAILINFO)
+    public ResponseEntity<UserDetailResponseDto> detailInfo(@RequestParam String id){
+        return ResponseEntity.ok(userService.getDetailInfo(id));
+    }
 
 
 

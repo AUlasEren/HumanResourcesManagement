@@ -2,6 +2,8 @@ package com.hrm.mapper;
 
 import com.hrm.dto.request.NewCreateUserRequestDto;
 import com.hrm.dto.request.UserUpdateRequestDto;
+import com.hrm.dto.response.UserDetailResponseDto;
+import com.hrm.dto.response.UserSummaryResponseDto;
 import com.hrm.rabbitmq.model.RegisterModel;
 import com.hrm.repository.entity.User;
 import org.mapstruct.Mapper;
@@ -17,4 +19,7 @@ public interface IUserMapper {
     User toUser(final NewCreateUserRequestDto dto);
 
     User toUser(final RegisterModel model);
+    UserSummaryResponseDto toUserSummaryResponseDto(final User user);
+
+    UserDetailResponseDto toUserDetailResponseDto(final User user);
 }
