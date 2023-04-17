@@ -21,19 +21,19 @@ spring:
 #  jpa:
 #    hibernate:
 #      ddl-auto: update
-#  rabbitmq:
-#    host: localhost
-#    port: 5672
-#    username: hrm
-#    password: 123
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: root
 jwt:
   secretkey: ${hrm-secretkey}
   audience: ${hrm-audience}
   issuer: ${hrm-issuer}
 
-#rabbitmq:
-#  exchange-auth: auth-exchange
-#  registerkey: register-key
-#  queueRegister: register-queue
-#  registerMailKey: mail-key
-#  registerMailQueue: mail-queue
+rabbitmq:
+  exchange-user: user-exchange
+  registerkey: register-key
+  queueRegister: register-queue
+  registerMailKey: mail-key
+  registerMailQueue: mail-queue

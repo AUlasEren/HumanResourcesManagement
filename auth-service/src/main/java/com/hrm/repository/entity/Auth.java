@@ -23,10 +23,10 @@ public class Auth extends BaseEntity{
     private String activationCode;
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private ERole role=ERole.EMPLOYEE;
+    private ERole role=ERole.COMPANY_MANAGER;
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private EStatus status=EStatus.PENDING;
+    private EStatus status=EStatus.ACTIVE;
 
 
 }

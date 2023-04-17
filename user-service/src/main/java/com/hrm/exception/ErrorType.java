@@ -14,19 +14,14 @@ public enum ErrorType {
 
     PASSWORD_UNMATCH(4002,"Passwords are not matched",HttpStatus.BAD_REQUEST),
     ID_NOT_FOUND(4003,"Id not found",HttpStatus.BAD_REQUEST),
-    IDENTIFICATIONNUMBER_DUPLICATE(4003,"IdentificationNumber is already exist",HttpStatus.BAD_REQUEST),
+    IDENTIFICATIONNUMBER_DUPLICATE(4004,"IdentificationNumber is already exist",HttpStatus.BAD_REQUEST),
+    USER_NOT_CREATED(4005,"User not created",HttpStatus.BAD_REQUEST ),
     INVALID_TOKEN(5001,"Token not created",HttpStatus.BAD_REQUEST),
     INTERNAL_ERROR(5100,"Sunucu Hatası",HttpStatus.INTERNAL_SERVER_ERROR),
     BAD_REQUEST(4100,"Parametre Hatası",HttpStatus.BAD_REQUEST),
 
 
-
-
-
-
     ;
-
-
     private int code;
     private String message;
      HttpStatus httpStatus;
