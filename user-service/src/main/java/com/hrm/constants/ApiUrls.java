@@ -15,5 +15,7 @@ public class ApiUrls {
     public static final String FINDBYID = "/findbyid";
     public static final String GETBYAD = "/getbyad";
     public static final String REGISTER = "/register";
+    public static final String SUMMARYINFO = "/summaryinfo";
+    public static final String DETAILINFO = "/detailinfo";
     public static final String DOLOGIN = "/dologin";
 }
