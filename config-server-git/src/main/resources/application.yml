@@ -1,0 +1,20 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server-git
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${hrmconfiguri}
+          default-label: main
+          skip-ssl-validation: true
+          username: ${hrmconfigusername}
+          password: ${hrmconfigpassword}
+#  zipkin:
+#    enabled: true
+#    base-url: ${zipkinurl}
+#    service:
+#      name: config-server-git
