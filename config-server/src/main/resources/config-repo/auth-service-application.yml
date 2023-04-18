@@ -1,0 +1,36 @@
+server:
+  port: 7071
+
+spring:
+  #  security:
+  #    name: hrm
+  #    password: 123
+  #  zipkin:
+  #    enabled: true
+  #    base-url: http://localhost:9411/
+  #    service:
+  #      name: auth-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
+    url: jdbc:postgresql://localhost:5432/HRMAUTHDB
+  jpa:
+    hibernate:
+      ddl-auto: update
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: root
+jwt:
+  secretkey: ${hrm-secretkey}
+  audience: ${hrm-audience}
+  issuer: ${hrm-issuer}
+
+rabbitmq:
+  exchange-auth: auth-exchange
+  registerkey: register-key
+  queueRegister: register-queue
+  registerMailKey: mail-key
+  registerMailQueue: mail-queue
