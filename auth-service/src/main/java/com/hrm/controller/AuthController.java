@@ -25,9 +25,6 @@ public class AuthController {
 
     @PostMapping(REGISTER)
     public ResponseEntity<RegisterResponseDto> register(@RequestBody @Valid NewRegisterRequestDto dto){
-        if(!dto.getPassword().equals(dto.getRePassword())){
-            throw new AuthServiceException(ErrorType.PASSWORD_UNMATCH);
-        }
         return ResponseEntity.ok(authService.register(dto));
     }
     @GetMapping(LOGIN)

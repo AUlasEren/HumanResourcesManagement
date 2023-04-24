@@ -19,7 +19,16 @@ public class RabbitMqConfig {
 
     @Value("${rabbitmq.exchange-auth}")
     private String exchangeAuth;
+    @Value("${rabbitmq.registerMailQueue}")
+    private String registerMailQueue;
+    @Value("${rabbitmq.registerMailKey}")
+    private String registerMailBindingKey;
 
+
+    @Bean
+    Queue registerMailQueue(){
+        return new Queue(registerMailQueue);
+    }
 
 
     @Bean
@@ -36,6 +45,11 @@ public class RabbitMqConfig {
     public Binding bindingRegister(final Queue registerQueue, final DirectExchange exchangeAuth){
         return BindingBuilder.bind(registerQueue).to(exchangeAuth).with(registerBindingKey);
     }
+    @Bean
+    public Binding bindingRegisterMail(final Queue registerMailQueue,final DirectExchange exchangeAuth){
+        return BindingBuilder.bind(registerMailQueue).to(exchangeAuth).with(registerMailBindingKey);
+    }
+
 
 
 }

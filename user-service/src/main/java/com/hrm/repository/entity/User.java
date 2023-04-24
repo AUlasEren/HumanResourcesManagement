@@ -34,7 +34,7 @@ public class User extends BaseEntity {
     private String address;
     private String phoneNumber;
     @Builder.Default
-    private ERole role = ERole.COMPANY_MANAGER;
+    private ERole role = ERole.DEFAULT;
     @Builder.Default
     private EStatus status = EStatus.ACTIVE;
     //auth DAN KAYIT OLDKTAN SONRA BU BILGILERIN YAZILACAGI SAYFAYA YONLENDIR.

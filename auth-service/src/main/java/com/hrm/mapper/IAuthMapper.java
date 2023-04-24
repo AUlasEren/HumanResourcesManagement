@@ -2,6 +2,7 @@ package com.hrm.mapper;
 
 import com.hrm.dto.request.NewRegisterRequestDto;
 import com.hrm.dto.response.RegisterResponseDto;
+import com.hrm.rabbitmq.model.RegisterMailModel;
 import com.hrm.rabbitmq.model.RegisterModel;
 import com.hrm.repository.entity.Auth;
 import org.mapstruct.Mapper;
@@ -19,6 +20,7 @@ public interface IAuthMapper {
 
     @Mapping(source = "id", target = "authId")
     RegisterModel toRegisterModel(final Auth auth);
+    RegisterMailModel toRegisterMailModel(final Auth auth);
 
 
 }
