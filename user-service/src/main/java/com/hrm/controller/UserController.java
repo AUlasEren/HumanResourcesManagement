@@ -49,7 +49,8 @@ public class UserController {
     public ResponseEntity<List<User>> findByCompanyManager (){
         return ResponseEntity.ok(userService.findByCompanyManager());
     }
-
-
-
+    @PutMapping(DEFAULTTOMANAGERCONVERT)
+    public ResponseEntity<Boolean> makeTheDefaultValueaCompanyAdministrator(String id){
+        return ResponseEntity.ok(userService.makeTheDefaultValueaCompanyAdministrator(id));
+    }
 }

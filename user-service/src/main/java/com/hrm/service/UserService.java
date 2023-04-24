@@ -89,4 +89,13 @@ public class UserService extends ServiceManager<User, String> {
         List<User> list = userRepository.findAllByRole(ERole.COMPANY_MANAGER);
         return list;
     }
+    public Boolean makeTheDefaultValueaCompanyAdministrator(String id){
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserServiceException(ErrorType.ID_NOT_FOUND);
+        }
+        user.get().setRole(ERole.COMPANY_MANAGER);
+        update(user.get());
+        return true;
+    }
 }

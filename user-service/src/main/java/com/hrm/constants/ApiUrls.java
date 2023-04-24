@@ -19,4 +19,5 @@ public class ApiUrls {
     public static final String SUMMARYINFO = "/summaryinfo";
     public static final String DETAILINFO = "/detailinfo";
     public static final String DOLOGIN = "/dologin";
+    public static final String DEFAULTTOMANAGERCONVERT = "/defaulttomanagerconvert";
 }
