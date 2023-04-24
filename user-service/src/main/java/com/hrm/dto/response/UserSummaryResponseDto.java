@@ -12,4 +12,6 @@ public class UserSummaryResponseDto {
     private String email;
     private String phoneNumber;
     private String image;
+    private Long companyId;
+    private String job;
 }

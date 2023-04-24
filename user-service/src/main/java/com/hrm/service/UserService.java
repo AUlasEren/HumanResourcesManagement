@@ -11,10 +11,12 @@ import com.hrm.mapper.IUserMapper;
 import com.hrm.rabbitmq.model.RegisterModel;
 import com.hrm.repository.IUserRepository;
 import com.hrm.repository.entity.User;
+import com.hrm.repository.enums.ERole;
 import com.hrm.repository.enums.EStatus;
 import com.hrm.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -81,5 +83,10 @@ public class UserService extends ServiceManager<User, String> {
             throw new UserServiceException(ErrorType.ID_NOT_FOUND);
         }
         return IUserMapper.INSTANCE.toUserDetailResponseDto(user.get());
+    }
+
+    public List<User> findByCompanyManager() {
+        List<User> list = userRepository.findAllByRole(ERole.COMPANY_MANAGER);
+        return list;
     }
 }

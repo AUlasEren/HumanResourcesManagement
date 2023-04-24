@@ -27,5 +27,6 @@ public class UserDetailResponseDto {
     private String phoneNumber;
     private ERole role;
     private EStatus status;
-
+    private Long companyId;
+    private String job;
 }

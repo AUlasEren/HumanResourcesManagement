@@ -41,4 +41,6 @@ public class NewCreateUserRequestDto {
 //    @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$", message = "Phone Number is invalid.")
     private String phoneNumber;
     private EStatus status;
+    private Long companyId;
+    private String job;
 }
