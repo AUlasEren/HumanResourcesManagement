@@ -16,9 +16,9 @@ public class ServiceManager <T extends BaseEntity,ID> implements IService<T,ID> 
     private final JpaRepository<T,ID> repository;
     @Override
     public T save(T t) {
-        t.setCreateDate(System.currentTimeMillis());
-        t.setUpdateDate(System.currentTimeMillis());
-
+        long time = System.currentTimeMillis();
+        t.setCreateDate(time);
+        t.setUpdateDate(time);
         return repository.save(t);
     }
 
@@ -27,14 +27,14 @@ public class ServiceManager <T extends BaseEntity,ID> implements IService<T,ID> 
         t.forEach(x->{
             x.setCreateDate(System.currentTimeMillis());
             x.setUpdateDate(System.currentTimeMillis());
-
         });
         return repository.saveAll(t);
     }
 
     @Override
     public T update(T t) {
-        t.setUpdateDate(System.currentTimeMillis());
+        long time = System.currentTimeMillis();
+        t.setUpdateDate(time);
         return repository.save(t);
     }
 

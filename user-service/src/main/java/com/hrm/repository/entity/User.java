@@ -1,5 +1,6 @@
 package com.hrm.repository.entity;
 
+import com.hrm.repository.enums.EDepartment;
 import com.hrm.repository.enums.ERole;
 import com.hrm.repository.enums.EStatus;
 import lombok.*;
@@ -16,24 +17,28 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 @Document
-public class User extends BaseEntity{
+public class User extends BaseEntity {
     @Id
-    private  String id;
-    private  Long authId;
-    private  String image;
-    private  String name;
-    private  String secondName;
-    private  String lastName;
-    private  String secondLastName;
-    private  LocalDate birthDate;
-    private  String placeOfBirth;
+    private String id;
+    private Long authId;
+    private Long companyId;
+    private String image;
+    private String name;
+    private String secondName;
+    private String lastName;
+    private String secondLastName;
+    private LocalDate birthDate;
+    private String placeOfBirth;
     private Long identificationNumber;
     private String email;
     private String address;
     private String phoneNumber;
     @Builder.Default
-    private ERole role=ERole.EMPLOYEE;
+    private ERole role = ERole.COMPANY_MANAGER;
     @Builder.Default
-    private EStatus status=EStatus.ACTIVE;
+    private EStatus status = EStatus.ACTIVE;
     //auth DAN KAYIT OLDKTAN SONRA BU BILGILERIN YAZILACAGI SAYFAYA YONLENDIR.
+    @Builder.Default
+    private EDepartment department = EDepartment.DEFAULT;
+    private String job;
 }

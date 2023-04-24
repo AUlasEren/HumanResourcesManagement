@@ -45,6 +45,10 @@ public class UserController {
         return ResponseEntity.ok(userService.getDetailInfo(id));
     }
 
+    @GetMapping(FINDBYCOMPANYMANAGER)
+    public ResponseEntity<List<User>> findByCompanyManager (){
+        return ResponseEntity.ok(userService.findByCompanyManager());
+    }
 
 
 
