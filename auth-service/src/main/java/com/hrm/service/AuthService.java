@@ -63,7 +63,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         auth.setActivationCode(code);
         auth.setPassword(code);
         authRepository.save(auth);
-        registerProducer.sendNewUser(IAuthMapper.INSTANCE.toRegisterModel(auth));
+     //   registerProducer.sendNewUser(IAuthMapper.INSTANCE.toRegisterModel(auth));
         mailProducer.sendNewMail(IAuthMapper.INSTANCE.toRegisterMailModel(auth));
         return true;
     }
