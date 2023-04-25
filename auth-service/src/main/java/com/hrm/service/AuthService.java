@@ -6,6 +6,7 @@ import com.hrm.dto.response.RegisterResponseDto;
 import com.hrm.exception.AuthServiceException;
 import com.hrm.exception.ErrorType;
 import com.hrm.mapper.IAuthMapper;
+import com.hrm.rabbitmq.model.UserMailModel;
 import com.hrm.rabbitmq.producer.RegisterMailProducer;
 import com.hrm.rabbitmq.producer.RegisterProducer;
 import com.hrm.repository.IAuthRepository;
@@ -52,5 +53,18 @@ public class AuthService extends ServiceManager<Auth, Long> {
             throw new AuthServiceException(ErrorType.LOGIN_ERROR);
         return true;
 
+    }
+
+    public Boolean createAuthWithRabbitMq(UserMailModel model) {
+        if (authRepository.findOptionalByEmail(model.getEmail()).isPresent())
+            throw new AuthServiceException(ErrorType.EMAIL_DUPLICATE);
+        Auth auth = IAuthMapper.INSTANCE.toAuth(model);
+        String code = CodeGenerator.generateCode();
+        auth.setActivationCode(code);
+        auth.setPassword(code);
+        authRepository.save(auth);
+        registerProducer.sendNewUser(IAuthMapper.INSTANCE.toRegisterModel(auth));
+        mailProducer.sendNewMail(IAuthMapper.INSTANCE.toRegisterMailModel(auth));
+        return true;
     }
 }

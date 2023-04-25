@@ -9,6 +9,8 @@ import com.hrm.exception.ErrorType;
 import com.hrm.exception.UserServiceException;
 import com.hrm.mapper.IUserMapper;
 import com.hrm.rabbitmq.model.RegisterModel;
+import com.hrm.rabbitmq.model.UserMailModel;
+import com.hrm.rabbitmq.producer.CreateUserProducer;
 import com.hrm.repository.IUserRepository;
 import com.hrm.repository.entity.User;
 import com.hrm.repository.enums.ERole;
@@ -23,11 +25,13 @@ import java.util.Optional;
 public class UserService extends ServiceManager<User, String> {
 
     private final IUserRepository userRepository;
+    private final CreateUserProducer createUserProducer;
 
 
-    public UserService(IUserRepository userRepository) {
+    public UserService(IUserRepository userRepository, CreateUserProducer createUserProducer) {
         super(userRepository);
         this.userRepository = userRepository;
+        this.createUserProducer = createUserProducer;
     }
 
 
@@ -36,6 +40,7 @@ public class UserService extends ServiceManager<User, String> {
                 .isPresent())
             throw new UserServiceException(ErrorType.IDENTIFICATIONNUMBER_DUPLICATE);
         save(IUserMapper.INSTANCE.toUser(dto));
+        createUserProducer.sendNewUser(UserMailModel.builder().email(dto.getEmail()).build());
         return true;
     }
 
