@@ -5,6 +5,7 @@ import com.hrm.dto.request.UpdateCompanyManagerRequestDto;
 import com.hrm.exception.ErrorType;
 import com.hrm.exception.CompanyManagerServiceException;
 import com.hrm.mapper.ICompanyManagerMapper;
+import com.hrm.rabbitmq.producer.RegisterCompanyManagerProducer;
 import com.hrm.repository.ICompanyManagerRepository;
 import com.hrm.repository.entity.CompanyManager;
 import com.hrm.repository.enums.EStatus;
@@ -16,17 +17,19 @@ import java.util.Optional;
 @Service
 public class CompanyManagerService extends ServiceManager<CompanyManager, String> {
     private final ICompanyManagerRepository companyManagerRepository;
+    private final RegisterCompanyManagerProducer registerCompanyManagerProducer;
 
-    public CompanyManagerService(ICompanyManagerRepository companyManagerRepository) {
+    public CompanyManagerService(ICompanyManagerRepository companyManagerRepository, RegisterCompanyManagerProducer registerCompanyManagerProducer) {
         super(companyManagerRepository);
         this.companyManagerRepository = companyManagerRepository;
+        this.registerCompanyManagerProducer = registerCompanyManagerProducer;
     }
 
     public Boolean createCompanyManager(NewCreateCompanyManagerRequestDto dto) {
         if (companyManagerRepository.findOptionalByEmail(dto.getEmail()).isPresent())
             throw new CompanyManagerServiceException(ErrorType.EMAIL_DUPLICATE);
-        save(ICompanyManagerMapper.INSTANCE.toCompanyManager(dto));
-        // bu kaydı rabbitle autha göndereceğiz.
+        CompanyManager companyManager = save(ICompanyManagerMapper.INSTANCE.toCompanyManager(dto));
+        registerCompanyManagerProducer.sendNewCompanyManager(ICompanyManagerMapper.INSTANCE.toModel(companyManager));
         return true;
     }
 
