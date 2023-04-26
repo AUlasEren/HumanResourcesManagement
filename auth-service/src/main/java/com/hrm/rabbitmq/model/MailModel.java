@@ -1,9 +1,6 @@
 package com.hrm.rabbitmq.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -11,7 +8,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterMailModel implements Serializable {
+public class MailModel implements Serializable {
     private String email;
     private String activationCode;
 }

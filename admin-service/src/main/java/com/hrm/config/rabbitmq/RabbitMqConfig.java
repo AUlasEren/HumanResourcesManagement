@@ -1,4 +1,5 @@
 package com.hrm.config.rabbitmq;
+
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -7,31 +8,25 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
 @Configuration
 public class RabbitMqConfig {
-    @Value("${rabbitmq.exchange-auth}")
-    private String exchange;
-    @Value("${rabbitmq.mailBindingKey}")
-    private String mailBindingKey;
+    @Value("${rabbitmq.exchange-admin}")
+    private String exchangeAdmin;
     @Value("${rabbitmq.queueAdminRegister}")
     private String registerAdminQueue;
-    @Value ("${rabbitmq.mailQueue}")
-    private String mailQueue;
+    @Value("${rabbitmq.registerAdminBindingKey}")
+    private String registerAdminBindingKey;
     @Bean
-    DirectExchange exchangeAuth(){
-        return  new DirectExchange(exchange);
-    }
-    @Bean
-    Queue mailQueue(){
-        return new Queue(mailQueue);
+    DirectExchange exchangeRegisterAdmin(){
+        return new DirectExchange(exchangeAdmin);
     }
     @Bean
     Queue registerAdminQueue(){
         return new Queue(registerAdminQueue);
     }
     @Bean
-    public Binding bindingRegisterMail(final Queue mailQueue, final DirectExchange exchange){
-        return BindingBuilder.bind(mailQueue).to(exchange).with(mailBindingKey);
+    public Binding registerAdminBindingKey(final Queue registerAdminQueue,final DirectExchange exchangeRegisterAdmin){
+        return BindingBuilder.bind(registerAdminQueue).to(exchangeRegisterAdmin).with(registerAdminBindingKey);
     }
+
 }

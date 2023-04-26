@@ -1,6 +1,6 @@
 package com.hrm.rabbitmq.producer;
 
-import com.hrm.rabbitmq.model.RegisterMailModel;
+import com.hrm.rabbitmq.model.MailModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RegisterMailProducer {
+public class MailProducer {
     @Value("${rabbitmq.exchange-auth}")
-    private String directExchange;
-    @Value("${rabbitmq.registerMailKey}")
-    private String registerMailKey;
+    private String exchange;
+    @Value("${rabbitmq.mailBindingKey}")
+    private String mailBindingKey;
 
     private final RabbitTemplate rabbitTemplate;
 
-    public void sendNewMail(RegisterMailModel model){
-        rabbitTemplate.convertAndSend(directExchange,registerMailKey,model);
+    public void sendNewMail(MailModel model){
+        rabbitTemplate.convertAndSend(exchange,mailBindingKey,model);
     }
 }
