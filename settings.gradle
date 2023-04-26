@@ -1,7 +1,9 @@
 rootProject.name = 'HumanResourcesManagement'
 include 'auth-service'
 include 'config-server-git'
-include 'user-service'
+include 'admin-service'
 include 'company-service'
 include 'mail-service'
+include 'companymanager-service'
+include 'employee-service'
 
