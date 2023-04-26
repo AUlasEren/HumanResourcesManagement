@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RegisterCompanyManagerProducer {
-    @Value("${rabbitmq.exchange-companymanager}")
-    private String companyManagerExchange;
+    @Value("${rabbitmq.exchange-admin}")
+    private String exchangeAdmin;
     @Value("${rabbitmq.registerCompanyManagerBindingKey}")
     private String registerCompanyManagerKey;
     private final RabbitTemplate rabbitTemplate;
 
     public void sendNewAdmin(RegisterAdminModel model){
-        rabbitTemplate.convertAndSend(companyManagerExchange,registerCompanyManagerKey,model);
+        rabbitTemplate.convertAndSend(exchangeAdmin,registerCompanyManagerKey,model);
     }
 }
