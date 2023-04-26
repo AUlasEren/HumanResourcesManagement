@@ -1,7 +1,5 @@
 package com.hrm.repository.entity;
 
-import com.hrm.repository.enums.EDepartment;
-import com.hrm.repository.enums.ERole;
 import com.hrm.repository.enums.EStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -17,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 @Document
-public class User extends BaseEntity {
+public class Admin extends BaseEntity {
     @Id
     private String id;
     private Long authId;
@@ -34,11 +32,7 @@ public class User extends BaseEntity {
     private String address;
     private String phoneNumber;
     @Builder.Default
-    private ERole role = ERole.DEFAULT;
-    @Builder.Default
     private EStatus status = EStatus.ACTIVE;
     //auth DAN KAYIT OLDKTAN SONRA BU BILGILERIN YAZILACAGI SAYFAYA YONLENDIR.
-    @Builder.Default
-    private EDepartment department = EDepartment.DEFAULT;
-    private String job;
+
 }
