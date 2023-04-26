@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RegisterCompanyManagerProducer {
-    @Value("${rabbitmq.exchangecompanymanager}")
+    @Value("${rabbitmq.exchange-manager}")
     private String exchangeCompanyManager;
 
     @Value("${rabbitmq.registerCompanyManagerBindingKey}")

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
 public class RabbitMqConfig {
-    @Value("${rabbitmq.exchangecompanymanager}")
+    @Value("${rabbitmq.exchange-manager}")
     private String exchangeCompanyManager;
     @Value("${rabbitmq.queueCompanyManagerRegister}")
     private String registerCompanyManagerQueue;
