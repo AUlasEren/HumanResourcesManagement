@@ -1,6 +1,7 @@
 package com.hrm.mapper;
 
 import com.hrm.dto.request.NewCreateEmployeeRequestDto;
+import com.hrm.rabbitmq.model.RegisterEmployeeModel;
 import com.hrm.repository.entity.Employee;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -12,5 +13,6 @@ public interface IEmployeeMapper {
     IEmployeeMapper INSTANCE = Mappers.getMapper(IEmployeeMapper.class);
 
     Employee toEmployee(final NewCreateEmployeeRequestDto dto);
+    RegisterEmployeeModel toModel(final Employee employe);
 
 }

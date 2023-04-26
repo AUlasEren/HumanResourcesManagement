@@ -9,6 +9,7 @@ import com.hrm.mapper.IAuthMapper;
 import com.hrm.rabbitmq.model.MailModel;
 import com.hrm.rabbitmq.model.RegisterAdminModel;
 import com.hrm.rabbitmq.model.RegisterCompanyManagerModel;
+import com.hrm.rabbitmq.model.RegisterEmployeeModel;
 import com.hrm.rabbitmq.producer.MailProducer;
 import com.hrm.repository.IAuthRepository;
 import com.hrm.repository.entity.Auth;
@@ -63,7 +64,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         return true;
     }
 
-    public Boolean createEmployeeManagerWithRabbitMq(RegisterCompanyManagerModel model) {
+    public Boolean createCompanyManagerWithRabbitMq(RegisterCompanyManagerModel model) {
         if (authRepository.findOptionalByEmail(model.getEmail()).isPresent())
             throw new AuthServiceException(ErrorType.EMAIL_DUPLICATE);
         //Auth auth = IAuthMapper.INSTANCE.toAuth(model);
@@ -72,6 +73,18 @@ public class AuthService extends ServiceManager<Auth, Long> {
         auth.setActivationCode(code);
         auth.setPassword(code);
         authRepository.save(auth);
+        mailProducer.sendNewMail(MailModel.builder().activationCode(auth.getActivationCode()).email(auth.getEmail()).build());
+        return true;
+    }
+    public Boolean createEmployeeWithRabbitMq(RegisterEmployeeModel model) {
+        if (authRepository.findOptionalByEmail(model.getEmail()).isPresent())
+            throw new AuthServiceException(ErrorType.EMAIL_DUPLICATE);
+        //Auth auth = IAuthMapper.INSTANCE.toAuth(model);
+        Auth auth = Auth.builder().email(model.getEmail()).build();
+        String code = CodeGenerator.generateCode();
+        auth.setActivationCode(code);
+        auth.setPassword(code);
+        save(auth);
         mailProducer.sendNewMail(MailModel.builder().activationCode(auth.getActivationCode()).email(auth.getEmail()).build());
         return true;
     }

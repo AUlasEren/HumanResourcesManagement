@@ -5,6 +5,7 @@ import com.hrm.dto.request.UpdateEmployeeRequestDto;
 import com.hrm.exception.EmployeeServiceException;
 import com.hrm.exception.ErrorType;
 import com.hrm.mapper.IEmployeeMapper;
+import com.hrm.rabbitmq.producer.RegisterEmployeeProducer;
 import com.hrm.repository.IEmployeeRepository;
 import com.hrm.repository.entity.Employee;
 import com.hrm.repository.enums.EStatus;
@@ -16,17 +17,20 @@ import java.util.Optional;
 @Service
 public class EmployeeService extends ServiceManager<Employee, String> {
     private final IEmployeeRepository employeeRepository;
+    private final RegisterEmployeeProducer registerEmployeeProducer;
 
-    public EmployeeService(IEmployeeRepository employeeRepository) {
+    public EmployeeService(IEmployeeRepository employeeRepository, RegisterEmployeeProducer registerEmployeeProducer) {
         super(employeeRepository);
         this.employeeRepository = employeeRepository;
+        this.registerEmployeeProducer = registerEmployeeProducer;
     }
 
     public Boolean createEmployee(NewCreateEmployeeRequestDto dto) {
         if (employeeRepository.findOptionalByEmail(dto.getEmail()).isPresent())
             throw new EmployeeServiceException(ErrorType.EMAIL_DUPLICATE);
-        save(IEmployeeMapper.INSTANCE.toEmployee(dto));
+       Employee employe = save(IEmployeeMapper.INSTANCE.toEmployee(dto));
         // bu kaydı rabbitle autha göndereceğiz.
+        registerEmployeeProducer.sendNewEmployee(IEmployeeMapper.INSTANCE.toModel(employe));
         return true;
     }
 

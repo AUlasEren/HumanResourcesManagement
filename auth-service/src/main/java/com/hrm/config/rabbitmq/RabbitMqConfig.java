@@ -20,10 +20,16 @@ public class RabbitMqConfig {
     private String mailQueue;
     @Value("${rabbitmq.queueCompanyManagerRegister}")
     private String registerCompanyManagerQueue;
+    @Value("${rabbitmq.queueEmployeeRegister}")
+    private String registerEmployeeQueue;
 
     @Bean
     Queue registerCompanyManagerQueue(){
         return new Queue(registerCompanyManagerQueue);
+    }
+    @Bean
+    Queue registerEmployeeQueue(){
+        return new Queue(registerEmployeeQueue);
     }
     @Bean
     DirectExchange exchangeAuth(){
