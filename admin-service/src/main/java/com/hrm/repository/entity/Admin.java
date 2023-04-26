@@ -20,6 +20,7 @@ public class Admin extends BaseEntity {
     private String id;
     private Long authId;
 //    private Long companyId;
+    private String activationCode;
     private String image;
     private String name;
     private String secondName;

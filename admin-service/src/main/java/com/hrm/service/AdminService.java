@@ -6,6 +6,7 @@ import com.hrm.dto.request.UpdateAdminRequestDto;
 import com.hrm.exception.ErrorType;
 import com.hrm.exception.AdminServiceException;
 import com.hrm.mapper.IAdminMapper;
+import com.hrm.rabbitmq.producer.RegisterAdminProducer;
 import com.hrm.repository.IAdminRepository;
 import com.hrm.repository.entity.Admin;
 import com.hrm.repository.enums.EStatus;
@@ -18,18 +19,20 @@ import java.util.Optional;
 public class AdminService extends ServiceManager<Admin, String> {
 
     private final IAdminRepository adminRepository;
+    private final RegisterAdminProducer registerAdminProducer;
 
 
-    public AdminService(IAdminRepository adminRepository) {
+    public AdminService(IAdminRepository adminRepository, RegisterAdminProducer registerAdminProducer) {
         super(adminRepository);
         this.adminRepository = adminRepository;
+        this.registerAdminProducer = registerAdminProducer;
     }
 
     public Boolean createAdmin(NewCreateAdminRequestDto dto) {
         if (adminRepository.findOptionalByEmail(dto.getEmail()).isPresent())
             throw new AdminServiceException(ErrorType.EMAIL_DUPLICATE);
-        save(IAdminMapper.INSTANCE.toAdmin(dto));
-        // bu kaydı rabbitle autha göndereceğiz.
+        Admin admin = save(IAdminMapper.INSTANCE.toAdmin(dto));
+        registerAdminProducer.sendNewAdmin(IAdminMapper.INSTANCE.toRegisterAdminModel(admin));
         return true;
     }
 

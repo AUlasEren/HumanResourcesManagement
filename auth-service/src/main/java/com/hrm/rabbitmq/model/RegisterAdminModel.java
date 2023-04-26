@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Data
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserMailModel implements Serializable {
+public class RegisterAdminModel implements Serializable {
+
     private String email;
 }
