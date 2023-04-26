@@ -16,17 +16,40 @@ public class RabbitMqConfig {
     private String registerAdminQueue;
     @Value("${rabbitmq.registerAdminBindingKey}")
     private String registerAdminBindingKey;
+
+    @Value("${rabbitmq.exchange-companymanager}")
+    private String companyManagerExchange;
+    @Value("${rabbitmq.queueCompanyManagerRegister}")
+    private String registerCompanyManagerQueue;
+    @Value("${rabbitmq.registerCompanyManagerBindingKey}")
+    private String registerCompanyManagerKey;
+
+
+
     @Bean
     DirectExchange exchangeRegisterAdmin(){
         return new DirectExchange(exchangeAdmin);
     }
     @Bean
+    DirectExchange exchangeCompanyManager(){
+        return new DirectExchange(companyManagerExchange);
+    }
+
+    @Bean
     Queue registerAdminQueue(){
         return new Queue(registerAdminQueue);
     }
     @Bean
+    Queue registerCompanyManagerQueue(){
+        return new Queue(registerCompanyManagerQueue);
+    }
+    @Bean
     public Binding registerAdminBindingKey(final Queue registerAdminQueue,final DirectExchange exchangeRegisterAdmin){
         return BindingBuilder.bind(registerAdminQueue).to(exchangeRegisterAdmin).with(registerAdminBindingKey);
+    }
+    @Bean
+    public Binding registerCompanyManagerKey(final Queue registerCompanyManagerQueue,final DirectExchange companyManagerExchange){
+        return BindingBuilder.bind(registerCompanyManagerQueue).to(companyManagerExchange).with(registerCompanyManagerKey);
     }
 
 }
