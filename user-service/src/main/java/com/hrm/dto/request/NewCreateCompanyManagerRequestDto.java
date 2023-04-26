@@ -1,22 +1,17 @@
 package com.hrm.dto.request;
 
-import com.hrm.repository.enums.ERole;
 import com.hrm.repository.enums.EStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class NewCreateUserRequestDto {
+public class NewCreateCompanyManagerRequestDto {
     private  String image;
 //    @Pattern(regexp = "^[a-zA-Z]+$", message = "Ad soyad sadece harf içermelidir.")
 //    @Size(min = 3, max = 50, message = "Ad soyad en az 3, en fazla 50 karakter olmalıdır.")

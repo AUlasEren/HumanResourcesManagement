@@ -1,7 +1,7 @@
 package com.hrm.rabbitmq.consumer;
 
 import com.hrm.rabbitmq.model.RegisterModel;
-import com.hrm.service.UserService;
+import com.hrm.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class RegisterConsumer {
 
-    private final UserService userService;
+    private final AdminService adminService;
 
     @RabbitListener(queues = ("${rabbitmq.queueRegister}"))
     public void newUserCreate(RegisterModel model){
         log.info("User {}", model.toString());
-        userService.createUserWithRabbitMq(model);
+        adminService.createUserWithRabbitMq(model);
     }
 
 

@@ -2,12 +2,12 @@ package com.hrm.controller;
 
 import static com.hrm.constants.ApiUrls.*;
 
-import com.hrm.dto.request.NewCreateUserRequestDto;
+import com.hrm.dto.request.NewCreateCompanyManagerRequestDto;
 import com.hrm.dto.request.UserUpdateRequestDto;
 import com.hrm.dto.response.UserDetailResponseDto;
 import com.hrm.dto.response.UserSummaryResponseDto;
-import com.hrm.repository.entity.User;
-import com.hrm.service.UserService;
+import com.hrm.repository.entity.Admin;
+import com.hrm.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,41 +16,41 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(USER)
 @RequiredArgsConstructor
-public class UserController {
-    private final UserService userService;
+public class AdminController {
+    private final AdminService adminService;
 
     @PostMapping(CREATE)
-    public ResponseEntity<Boolean> createUser(@RequestBody NewCreateUserRequestDto dto){
-        return ResponseEntity.ok(userService.createUser(dto));
+    public ResponseEntity<Boolean> createUser(@RequestBody NewCreateCompanyManagerRequestDto dto){
+        return ResponseEntity.ok(adminService.createUser(dto));
     }
     @PutMapping(UPDATE)
     public ResponseEntity<Boolean> updateUser(@RequestBody UserUpdateRequestDto dto){
-        return ResponseEntity.ok(userService.update(dto));
+        return ResponseEntity.ok(adminService.update(dto));
     }
     @GetMapping(FINDALL)
-    public ResponseEntity<List<User>> findAll(){
-        return ResponseEntity.ok(userService.findAll());
+    public ResponseEntity<List<Admin>> findAll(){
+        return ResponseEntity.ok(adminService.findAll());
     }
     @DeleteMapping(DELETEBYID)
     public ResponseEntity<Boolean> deleteUser(String id){
-        return ResponseEntity.ok(userService.delete(id));
+        return ResponseEntity.ok(adminService.delete(id));
     }
 
     @GetMapping(SUMMARYINFO)
     public ResponseEntity<UserSummaryResponseDto> summaryInfo(@RequestParam String id){
-        return ResponseEntity.ok(userService.getSummaryInfo(id));
+        return ResponseEntity.ok(adminService.getSummaryInfo(id));
     }
     @GetMapping(DETAILINFO)
     public ResponseEntity<UserDetailResponseDto> detailInfo(@RequestParam String id){
-        return ResponseEntity.ok(userService.getDetailInfo(id));
+        return ResponseEntity.ok(adminService.getDetailInfo(id));
     }
 
     @GetMapping(FINDBYCOMPANYMANAGER)
-    public ResponseEntity<List<User>> findByCompanyManager (){
-        return ResponseEntity.ok(userService.findByCompanyManager());
+    public ResponseEntity<List<Admin>> findByCompanyManager (){
+        return ResponseEntity.ok(adminService.findByCompanyManager());
     }
     @PutMapping(DEFAULTTOMANAGERCONVERT)
     public ResponseEntity<Boolean> makeTheDefaultValueaCompanyAdministrator(String id){
-        return ResponseEntity.ok(userService.makeTheDefaultValueaCompanyAdministrator(id));
+        return ResponseEntity.ok(adminService.makeTheDefaultValueaCompanyAdministrator(id));
     }
 }
