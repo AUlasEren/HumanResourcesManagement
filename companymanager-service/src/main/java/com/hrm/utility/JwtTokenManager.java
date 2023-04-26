@@ -37,22 +37,22 @@ public class JwtTokenManager {
         }
     }
 
-    public Optional<String> createToken(Long id, ERole roles) {
-        String token = null;
-        Date date = new Date(System.currentTimeMillis() + (1000 * 60 * 5));
-        try {
-            token = JWT.create().withAudience(audience)
-                    .withIssuer(issuer) //jwtnin sahibi
-                    .withIssuedAt(new Date()) // token oluşturulma tarihi
-                    .withExpiresAt(date)
-                    .withClaim("id", id)
-                    .withClaim("roles", roles.toString())
-                    .sign(Algorithm.HMAC512(secretKey));
-            return Optional.of(token);
-        } catch (Exception exception) {
-            return Optional.empty();
-        }
-    }
+//    public Optional<String> createToken(Long id, ERole roles) {
+//        String token = null;
+//        Date date = new Date(System.currentTimeMillis() + (1000 * 60 * 5));
+//        try {
+//            token = JWT.create().withAudience(audience)
+//                    .withIssuer(issuer) //jwtnin sahibi
+//                    .withIssuedAt(new Date()) // token oluşturulma tarihi
+//                    .withExpiresAt(date)
+//                    .withClaim("id", id)
+//                    .withClaim("roles", roles.toString())
+//                    .sign(Algorithm.HMAC512(secretKey));
+//            return Optional.of(token);
+//        } catch (Exception exception) {
+//            return Optional.empty();
+//        }
+//    }
 
     public Boolean validateToken(String token) {
         try {
