@@ -1,8 +1,8 @@
 package com.hrm.mapper;
 
 import com.hrm.dto.request.NewCreateCompanyManagerRequestDto;
+import com.hrm.dto.response.CompanyManagerDetailResponseDto;
 import com.hrm.rabbitmq.model.RegisterCompanyManagerModel;
-import com.hrm.rabbitmq.producer.RegisterCompanyManagerProducer;
 import com.hrm.repository.entity.CompanyManager;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -15,4 +15,8 @@ public interface ICompanyManagerMapper {
 
     CompanyManager toCompanyManager(final NewCreateCompanyManagerRequestDto dto);
     RegisterCompanyManagerModel toModel(final CompanyManager companyManager);
+
+    CompanyManagerDetailResponseDto toCompanyManagerDetailResponseDto(final CompanyManager companyManager);
+
+
 }

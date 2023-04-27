@@ -2,6 +2,7 @@ package com.hrm.service;
 
 import com.hrm.dto.request.NewCreateEmployeeRequestDto;
 import com.hrm.dto.request.UpdateEmployeeRequestDto;
+import com.hrm.dto.response.EmployeeDetailResponseDto;
 import com.hrm.exception.EmployeeServiceException;
 import com.hrm.exception.ErrorType;
 import com.hrm.mapper.IEmployeeMapper;
@@ -12,6 +13,8 @@ import com.hrm.repository.enums.EStatus;
 import com.hrm.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -53,5 +56,14 @@ public class EmployeeService extends ServiceManager<Employee, String> {
         employee.get().setStatus(EStatus.DELETED);
         update(employee.get());
         return true;
+    }
+
+    public List<EmployeeDetailResponseDto> findAllByDetail() {
+        List<Employee> employeeList = findAll();
+        List<EmployeeDetailResponseDto> employeeDetailResponseDtoList = new ArrayList<>();
+        employeeList.forEach(x->{
+            employeeDetailResponseDtoList.add(IEmployeeMapper.INSTANCE.toEmployeeDetailResponseDto(x));
+        });
+        return employeeDetailResponseDtoList;
     }
 }

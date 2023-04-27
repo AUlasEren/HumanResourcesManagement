@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 public class NewCreateCompanyManagerRequestDto {
     private String job;
+    private Long companyId;
     private String image;
     private String name;
     private String secondName;

@@ -2,6 +2,7 @@ package com.hrm.controller;
 
 import com.hrm.dto.request.NewCreateEmployeeRequestDto;
 import com.hrm.dto.request.UpdateEmployeeRequestDto;
+import com.hrm.dto.response.EmployeeDetailResponseDto;
 import com.hrm.repository.entity.Employee;
 import com.hrm.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.hrm.constants.ApiUrls.*;
+import static com.hrm.constants.ApiUrls.FINDALLBYDETAIL;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,4 +40,16 @@ public class EmployeeController {
     public ResponseEntity<Boolean> deleteEmployee(String id) {
         return ResponseEntity.ok(employeeService.delete(id));
     }
+
+    @GetMapping(FINDBYID)
+    public ResponseEntity<Optional<Employee>> findById(String id){
+        return ResponseEntity.ok(employeeService.findById(id));
+    }
+
+    @GetMapping(FINDALLBYDETAIL)
+    public ResponseEntity<List<EmployeeDetailResponseDto>> findAllByDetail(){
+        return ResponseEntity.ok(employeeService.findAllByDetail());
+    }
+
+
 }

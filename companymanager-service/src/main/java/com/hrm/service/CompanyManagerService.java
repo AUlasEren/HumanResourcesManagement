@@ -2,6 +2,7 @@ package com.hrm.service;
 
 import com.hrm.dto.request.NewCreateCompanyManagerRequestDto;
 import com.hrm.dto.request.UpdateCompanyManagerRequestDto;
+import com.hrm.dto.response.CompanyManagerDetailResponseDto;
 import com.hrm.exception.ErrorType;
 import com.hrm.exception.CompanyManagerServiceException;
 import com.hrm.mapper.ICompanyManagerMapper;
@@ -12,6 +13,8 @@ import com.hrm.repository.enums.EStatus;
 import com.hrm.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -53,5 +56,14 @@ public class CompanyManagerService extends ServiceManager<CompanyManager, String
         companyManager.get().setStatus(EStatus.DELETED);
         update(companyManager.get());
         return true;
+    }
+
+    public List<CompanyManagerDetailResponseDto> findAllByDetail() {
+        List<CompanyManager> companyManagerList = findAll();
+        List<CompanyManagerDetailResponseDto> companyManagerDetailResponseDtoList = new ArrayList<>();
+        companyManagerList.forEach(x->{
+            companyManagerDetailResponseDtoList.add(ICompanyManagerMapper.INSTANCE.toCompanyManagerDetailResponseDto(x));
+        });
+        return companyManagerDetailResponseDtoList;
     }
 }
