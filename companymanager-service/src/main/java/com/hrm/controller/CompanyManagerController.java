@@ -2,6 +2,7 @@ package com.hrm.controller;
 
 import com.hrm.dto.request.NewCreateCompanyManagerRequestDto;
 import com.hrm.dto.request.UpdateCompanyManagerRequestDto;
+import com.hrm.dto.response.CompanyManagerDetailResponseDto;
 import com.hrm.repository.entity.CompanyManager;
 import com.hrm.service.CompanyManagerService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.hrm.constants.ApiUrls.*;
 
@@ -37,5 +39,15 @@ public class CompanyManagerController {
     @DeleteMapping(DELETEBYID)
     public ResponseEntity<Boolean> deleteCompanyManager(String id) {
         return ResponseEntity.ok(companyManagerService.delete(id));
+    }
+
+    @GetMapping(FINDBYID)
+    public ResponseEntity<Optional<CompanyManager>> findById(String id){
+        return ResponseEntity.ok(companyManagerService.findById(id));
+    }
+
+    @GetMapping(FINDALLBYDETAIL)
+    public ResponseEntity<List<CompanyManagerDetailResponseDto>> findAllByDetail(){
+        return ResponseEntity.ok(companyManagerService.findAllByDetail());
     }
 }

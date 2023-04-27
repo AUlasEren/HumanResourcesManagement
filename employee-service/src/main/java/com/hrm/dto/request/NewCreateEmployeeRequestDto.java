@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Builder
 public class NewCreateEmployeeRequestDto {
     private String image;
+    private Long companyId;
     private String name;
     private String secondName;
     private String lastName;
