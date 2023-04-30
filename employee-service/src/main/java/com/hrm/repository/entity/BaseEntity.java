@@ -15,4 +15,5 @@ import java.io.Serializable;
 public class BaseEntity implements Serializable {
     Long createDate;
     Long updateDate;
+    final String role= "EMPLOYEE";
 }

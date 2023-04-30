@@ -7,6 +7,7 @@ import com.hrm.repository.entity.CompanyManager;
 import com.hrm.service.CompanyManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import static com.hrm.constants.ApiUrls.*;
 public class CompanyManagerController {
     private final CompanyManagerService companyManagerService;
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(CREATE)
     public ResponseEntity<Boolean> createCompanyManager(@RequestBody NewCreateCompanyManagerRequestDto dto) {
         return ResponseEntity.ok(companyManagerService.createCompanyManager(dto));

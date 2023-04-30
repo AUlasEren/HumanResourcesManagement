@@ -10,6 +10,7 @@ import com.hrm.repository.entity.Auth;
 import com.hrm.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,13 +23,13 @@ import static com.hrm.constants.ApiUrls.*;
 public class AuthController {
 
     private final AuthService authService;
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(REGISTER)
     public ResponseEntity<RegisterResponseDto> register(@RequestBody @Valid NewRegisterRequestDto dto){
         return ResponseEntity.ok(authService.register(dto));
     }
     @GetMapping(LOGIN)
-    public ResponseEntity<Boolean> login(UserLoginDto dto){
+    public ResponseEntity<String> login(UserLoginDto dto){
         return ResponseEntity.ok(authService.login(dto));
     }
 

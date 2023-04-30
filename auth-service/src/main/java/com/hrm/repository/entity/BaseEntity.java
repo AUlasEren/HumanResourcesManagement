@@ -15,4 +15,5 @@ import javax.persistence.MappedSuperclass;
 public class BaseEntity {
     Long createDate;
     Long updateDate;
+    String role;
 }
