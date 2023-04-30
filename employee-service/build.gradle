@@ -6,4 +6,5 @@ buildscript {
 dependencies {
     implementation libs.springBootMongo
     implementation libs.springBootRabbitMQ
+    implementation libs.springBootSecurity
 }

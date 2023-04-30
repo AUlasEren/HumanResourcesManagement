@@ -10,4 +10,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class RegisterAdminModel implements Serializable {
     private String email;
+
 }

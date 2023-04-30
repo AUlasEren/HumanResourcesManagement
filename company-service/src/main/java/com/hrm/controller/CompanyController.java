@@ -9,6 +9,7 @@ import com.hrm.repository.entity.Company;
 import com.hrm.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,7 +20,7 @@ import java.util.List;
 @RequestMapping(COMPANY)
 public class CompanyController {
     private final CompanyService companyService;
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(CREATE)
     public ResponseEntity<Boolean> createCompany(@RequestBody CreateResponseDto dto) {
         return ResponseEntity.ok(companyService.createCompany(dto));

@@ -35,13 +35,13 @@ public class AdminService extends ServiceManager<Admin, String> {
         registerAdminProducer.sendNewAdmin(IAdminMapper.INSTANCE.toRegisterAdminModel(admin));
         return true;
     }
-    public Boolean createCompanyManager(NewCreateAdminRequestDto dto) {
-        if (adminRepository.findOptionalByEmail(dto.getEmail()).isPresent())
-            throw new AdminServiceException(ErrorType.EMAIL_DUPLICATE);
-        Admin admin = save(IAdminMapper.INSTANCE.toAdmin(dto));
-        registerAdminProducer.sendNewAdmin(IAdminMapper.INSTANCE.toRegisterAdminModel(admin));
-        return true;
-    }
+//    public Boolean createCompanyManager(NewCreateAdminRequestDto dto) {
+//        if (adminRepository.findOptionalByEmail(dto.getEmail()).isPresent())
+//            throw new AdminServiceException(ErrorType.EMAIL_DUPLICATE);
+//        Admin admin = save(IAdminMapper.INSTANCE.toAdmin(dto));
+//        registerAdminProducer.sendNewAdmin(IAdminMapper.INSTANCE.toRegisterAdminModel(admin));
+//        return true;
+//    }
 
     public Boolean updateAdmin(UpdateAdminRequestDto dto) {
         Optional<Admin> admin = adminRepository.findById(dto.getId());

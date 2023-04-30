@@ -9,9 +9,10 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @Getter
 public enum ErrorType {
-
+    TOKEN_NOT_CREATED(3001,"Token not created",HttpStatus.BAD_REQUEST),
     EMAIL_DUPLICATE(4001,"E-mail is already exist",HttpStatus.BAD_REQUEST),
     PASSWORD_UNMATCH(4002,"Passwords are not matched",HttpStatus.BAD_REQUEST),
+
     LOGIN_ERROR(4003,"Login error",HttpStatus.BAD_REQUEST),
     INVALID_TOKEN(5001,"Token not created",HttpStatus.BAD_REQUEST),
     INTERNAL_ERROR(5100,"Sunucu Hatası",HttpStatus.INTERNAL_SERVER_ERROR),

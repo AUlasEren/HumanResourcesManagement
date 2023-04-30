@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.hrm.exception.AuthServiceException;
 import com.hrm.exception.ErrorType;
+import com.hrm.repository.entity.Auth;
 import com.hrm.repository.enums.ERole;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -38,16 +39,16 @@ public class JwtTokenManager {
         }
     }
 
-    public Optional<String> createToken(Long id, ERole roles) {
+    public Optional<String> createToken(Auth auth) {
         String token = null;
-        Date date = new Date(System.currentTimeMillis() + (1000 * 60 * 5));
+        Date date = new Date(System.currentTimeMillis() + (1000 * 60 * 60));
         try {
             token = JWT.create().withAudience(audience)
                     .withIssuer(issuer) //jwtnin sahibi
                     .withIssuedAt(new Date()) // token oluşturulma tarihi
                     .withExpiresAt(date)
-                    .withClaim("id", id)
-                    .withClaim("roles", roles.toString())
+                    .withClaim("id", auth.getId())
+                    .withClaim("role", auth.getRole())
                     .sign(Algorithm.HMAC512(secretKey));
             return Optional.of(token);
         } catch (Exception exception) {
