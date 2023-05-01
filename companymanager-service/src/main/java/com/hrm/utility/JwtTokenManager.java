@@ -92,7 +92,7 @@ public class JwtTokenManager {
             if (decodedJWT == null) {
                 throw new CompanyManagerServiceException(ErrorType.INVALID_TOKEN);
             }
-            String role = decodedJWT.getClaim("roles").asString();
+            String role = decodedJWT.getClaim("role").asString();
             return Optional.of(role);
         } catch (Exception e) {
             System.out.println(e.getMessage());
