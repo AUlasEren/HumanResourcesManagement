@@ -42,6 +42,8 @@ public class AuthService extends ServiceManager<Auth, Long> {
         String code = CodeGenerator.generateCode();
         auth.setActivationCode(code);
         auth.setPassword(code);
+        String role = "ADMIN";
+        auth.setRole(role);
         save(auth);
         mailProducer.sendNewMail(MailModel.builder().activationCode(auth.getActivationCode()).email(auth.getEmail()).build());
         return IAuthMapper.INSTANCE.toRegisterResponseDto(auth);

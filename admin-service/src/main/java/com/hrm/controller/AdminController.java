@@ -6,6 +6,7 @@ import com.hrm.repository.entity.Admin;
 import com.hrm.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class AdminController {
     private final AdminService adminService;
 
     @PostMapping(CREATE)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Boolean> createAdmin(@RequestBody NewCreateAdminRequestDto dto) {
         return ResponseEntity.ok(adminService.createAdmin(dto));
     }
