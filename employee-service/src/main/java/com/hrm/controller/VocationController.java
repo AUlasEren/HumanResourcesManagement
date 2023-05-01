@@ -32,8 +32,9 @@ public class VocationController {
     public ResponseEntity<List<Vocation>> findAllVocation() {
         return ResponseEntity.ok(vocationService.findAll());
     }
-/*    @PutMapping(UPDATE)
-    public ResponseEntity<Boolean> updateVocation(UpdateEmployeeRequestDto dto) {
-        return ResponseEntity.ok(vocationService.updateVocation(dto));
-    }*/
+    //@PreAuthorize("hasAuthority('COMPANY_MANAGER')")
+    @GetMapping("/findallpending")
+    public ResponseEntity<List<Vocation>> findAllPendingVocation() {
+        return ResponseEntity.ok(vocationService.findAllPending());
+    }
 }
