@@ -1,7 +1,7 @@
 package com.hrm.config.security;
 
 
-import com.hrm.exception.AuthServiceException;
+import com.hrm.exception.AdminServiceException;
 import com.hrm.exception.ErrorType;
 import com.hrm.utility.JwtTokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +25,17 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
-        System.out.println("====>"+authorizationHeader);
-        if(authorizationHeader!=null&&authorizationHeader.startsWith("Bearer ")){ //&& SecurityContextHolder.getContext().getAuthentication()==null)
+        //System.out.println("====>"+authorizationHeader);
+        if(authorizationHeader!=null&&authorizationHeader.startsWith("Bearer ")){
             String token = authorizationHeader.substring(7);
-            Optional<Long> id = jwtTokenManager.getIdFromToken(token);
-            if(id.isPresent()){
-                UserDetails userDetails = jwtUserDetails.loadUserByUserId(id.get());
+            Optional<String> userRole = jwtTokenManager.getRoleFromToken(token);
+            if(userRole.isPresent()){//jwtTokenManager.validateToken(token)
+                UserDetails userDetails = jwtUserDetails.loadUserByUserRole(userRole.get());
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }else{
-                throw new AuthServiceException(ErrorType.INVALID_TOKEN);
+                throw new AdminServiceException(ErrorType.INVALID_TOKEN);
             }
         }
         filterChain.doFilter(request,response);
