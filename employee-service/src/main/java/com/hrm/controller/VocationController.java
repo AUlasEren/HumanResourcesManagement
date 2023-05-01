@@ -24,7 +24,7 @@ public class VocationController {
 
     @PreAuthorize("hasAuthority('EMPLOYEE')")
     @PostMapping(CREATE)
-    public ResponseEntity<Boolean> createVocation(NewCreateVocationRequestDto dto) {
+    public ResponseEntity<Boolean> createVocation(@RequestBody NewCreateVocationRequestDto dto) {
         return ResponseEntity.ok(vocationService.createVocation(dto));
     }
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
