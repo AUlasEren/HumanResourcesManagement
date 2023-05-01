@@ -12,6 +12,8 @@ import com.hrm.repository.entity.Vocation;
 import com.hrm.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
@@ -29,21 +31,17 @@ public class VocationService extends ServiceManager<Vocation, String> {
         this.employeService = employeService;
         this.employeeRepository = employeeRepository;
     }
-
     public Boolean createVocation(NewCreateVocationRequestDto dto){
         if (employeeRepository.findOptionalById(dto.getEmployeeId()).isPresent())
             throw new EmployeeServiceException(ErrorType.ID_NOT_FOUND);
+        if (dto.getStartOfVocationDate() == null && dto.getEndOfVocationDate() == null)
+            throw new EmployeeServiceException(ErrorType.VOCATION_NOT_CREATED);
         Vocation vocation = IVocationMapper.INSTANCE.toVocation(dto);
-        vocation.setVocationDuration(dayOffCalculation(dto.getStartOfVocationDate(),dto.getEndOfVocationDate()));
+        long daysBetween = ChronoUnit.DAYS.between(dto.getStartOfVocationDate(),dto.getEndOfVocationDate());
+        vocation.setVocationDuration(daysBetween);
         save(vocation);
         // bu kaydı rabbitle autha göndereceğiz.
       //  registerEmployeeProducer.sendNewEmployee(IEmployeeMapper.INSTANCE.toModel(employe));
         return true;
-    }
-    public Long dayOffCalculation(LocalDate startDay , LocalDate endDay){
-       return ChronoUnit.DAYS.between(startDay, endDay);
-   /*     Period period = Period.between(startDay, endDay);
-        long days = period.getDays();
-        return days;*/
     }
 }
