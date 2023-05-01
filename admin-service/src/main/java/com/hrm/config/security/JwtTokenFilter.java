@@ -3,6 +3,7 @@ package com.hrm.config.security;
 
 import com.hrm.exception.AdminServiceException;
 import com.hrm.exception.ErrorType;
+import com.hrm.service.AdminService;
 import com.hrm.utility.JwtTokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,10 +35,15 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            }else{
+            }else {
                 throw new AdminServiceException(ErrorType.INVALID_TOKEN);
             }
         }
-        filterChain.doFilter(request,response);
+        try {
+            filterChain.doFilter(request,response);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println();
+        }
     }
 }
