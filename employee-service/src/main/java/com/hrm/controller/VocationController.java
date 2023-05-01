@@ -28,14 +28,30 @@ public class VocationController {
     public ResponseEntity<Boolean> createVocation(@RequestBody NewCreateVocationRequestDto dto) {
         return ResponseEntity.ok(vocationService.createVocation(dto));
     }
+
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @GetMapping(FINDALL)
     public ResponseEntity<List<Vocation>> findAllVocation() {
         return ResponseEntity.ok(vocationService.findAll());
     }
+
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @GetMapping("/findallpending")
     public ResponseEntity<List<Vocation>> findAllPendingVocation() {
         return ResponseEntity.ok(vocationService.findAllPending());
     }
+
+    @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
+    @PutMapping(APPROVEVOCATIONREQUEST)
+    public ResponseEntity<Boolean> aprroveVocationRequest(String id){
+        return ResponseEntity.ok(vocationService.aprroveVocationRequest(id));
+    }
+
+    @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
+    @PutMapping(REJECTVOCATIONREQUEST)
+    public ResponseEntity<Boolean> rejectVocationRequest(String id){
+        return ResponseEntity.ok(vocationService.rejectVocationRequest(id));
+    }
+
+
 }
