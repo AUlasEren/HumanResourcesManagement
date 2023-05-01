@@ -13,6 +13,7 @@ import com.hrm.repository.enums.EVocationStatus;
 import com.hrm.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
+import java.awt.desktop.SystemEventListener;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,8 +59,29 @@ public class VocationService extends ServiceManager<Vocation, String> {
             if(x.getVocationStatus().equals(EVocationStatus.PENDING))
                 findAllPendingList.add(x);
         });
-
         return findAllPendingList;
 
+    }
+
+    public Boolean aprroveVocationRequest(String id) {
+        Optional<Vocation> vocation = findById(id);
+        if(vocation.isEmpty()){
+            throw new EmployeeServiceException(ErrorType.VOCATION_NOT_VALID);
+        }
+        vocation.get().setVocationStatus(EVocationStatus.ACCEPT);
+        vocation.get().setResponseOfRequestDate(LocalDate.now());
+        update(vocation.get());
+        return true;
+    }
+
+    public Boolean rejectVocationRequest(String id) {
+        Optional<Vocation> vocation = findById(id);
+        if(vocation.isEmpty()){
+            throw new EmployeeServiceException(ErrorType.VOCATION_NOT_VALID);
+        }
+        vocation.get().setVocationStatus(EVocationStatus.REJECT);
+        vocation.get().setResponseOfRequestDate(LocalDate.now());
+        update(vocation.get());
+        return true;
     }
 }
