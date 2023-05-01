@@ -59,5 +59,6 @@ public class VocationService extends ServiceManager<Vocation, String> {
         });
 
         return findAllPendingList;
+
     }
 }
