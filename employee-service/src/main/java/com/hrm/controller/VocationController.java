@@ -9,6 +9,7 @@ import com.hrm.service.VocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class VocationController {
     public ResponseEntity<List<Vocation>> findAllVocation() {
         return ResponseEntity.ok(vocationService.findAll());
     }
-    //@PreAuthorize("hasAuthority('COMPANY_MANAGER')")
+    @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @GetMapping("/findallpending")
     public ResponseEntity<List<Vocation>> findAllPendingVocation() {
         return ResponseEntity.ok(vocationService.findAllPending());

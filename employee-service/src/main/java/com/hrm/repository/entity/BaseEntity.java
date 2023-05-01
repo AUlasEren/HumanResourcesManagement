@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 
@@ -15,5 +16,6 @@ import java.io.Serializable;
 public class BaseEntity implements Serializable {
     Long createDate;
     Long updateDate;
-    final String role= "EMPLOYEE";
+/*    @Transient
+    final String role= "EMPLOYEE";*/
 }
