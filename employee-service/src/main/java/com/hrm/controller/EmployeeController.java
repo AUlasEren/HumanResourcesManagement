@@ -7,6 +7,7 @@ import com.hrm.repository.entity.Employee;
 import com.hrm.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import static com.hrm.constants.ApiUrls.FINDALLBYDETAIL;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
+    @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @PostMapping(CREATE)
     public ResponseEntity<Boolean> createEmployee(@RequestBody NewCreateEmployeeRequestDto dto) {
         return ResponseEntity.ok(employeeService.createEmployee(dto));
