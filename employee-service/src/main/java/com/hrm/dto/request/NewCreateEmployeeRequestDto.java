@@ -23,4 +23,5 @@ public class NewCreateEmployeeRequestDto {
     private String email;
     private String address;
     private String phoneNumber;
+    private Long salary;
 }

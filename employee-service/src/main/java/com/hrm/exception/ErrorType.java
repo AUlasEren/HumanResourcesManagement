@@ -18,12 +18,17 @@ public enum ErrorType {
     USER_NOT_CREATED(4005,"User not created",HttpStatus.BAD_REQUEST ),
     VOCATION_NOT_CREATED(3001,"Vocation not created",HttpStatus.BAD_REQUEST ),
     VOCATION_NOT_VALID(3002,"Vocation not valid",HttpStatus.BAD_REQUEST ),
+    VOCATION_NOT_REQUESTED(3003,"You don't have any vocation request",HttpStatus.BAD_REQUEST ),
+    ADVANCE_NOT_VALID(7001,"Advance not valid",HttpStatus.BAD_REQUEST ),
+    AMOUNT_NOT_VALIABLE(7002,"Amount not valiable",HttpStatus.BAD_REQUEST ),
+    AMOUND_NOT_NULL(6001,"Amount not null",HttpStatus.BAD_REQUEST ),
+    EXPENSE_NOT_VALID(6002,"Expense not valid",HttpStatus.BAD_REQUEST ),
     INVALID_TOKEN(5001,"Token not created",HttpStatus.BAD_REQUEST),
     INTERNAL_ERROR(5100,"Sunucu Hatası",HttpStatus.INTERNAL_SERVER_ERROR),
     BAD_REQUEST(4100,"Parametre Hatası",HttpStatus.BAD_REQUEST),
 
 
-    ;
+  ;
     private int code;
     private String message;
      HttpStatus httpStatus;

@@ -4,6 +4,7 @@ import com.hrm.dto.request.NewCreateEmployeeRequestDto;
 import com.hrm.dto.request.UpdateEmployeeRequestDto;
 import com.hrm.dto.response.EmployeeDetailResponseDto;
 import com.hrm.repository.entity.Employee;
+import com.hrm.repository.entity.Vocation;
 import com.hrm.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,11 @@ public class EmployeeController {
     @GetMapping(FINDALLBYDETAIL)
     public ResponseEntity<List<EmployeeDetailResponseDto>> findAllByDetail(){
         return ResponseEntity.ok(employeeService.findAllByDetail());
+    }
+
+    @GetMapping(FINDALLVOCATIONBYEMPLOYEEID)
+    public ResponseEntity<List<Vocation>> findAllVocationBtEmployeeId(String id){
+        return ResponseEntity.ok(employeeService.findAllVocationBtEmployeeId(id));
     }
 
 

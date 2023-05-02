@@ -1,7 +1,7 @@
 package com.hrm.repository.entity;
 
 import com.hrm.repository.enums.EDepartment;
-import com.hrm.repository.enums.EStatus;
+import com.hrm.repository.enums.EEmployeeStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import nonapi.io.github.classgraph.json.Id;
@@ -35,8 +35,9 @@ public class Employee extends BaseEntity{
     private LocalDateTime startDayOfWork;
     private LocalDateTime endDayOfWork;
     private String job;
+    private Long salary;
     @Builder.Default
-    private EStatus status = EStatus.ACTIVE;
+    private EEmployeeStatus status = EEmployeeStatus.ACTIVE;
     @Builder.Default
     private EDepartment department = EDepartment.DEFAULT;
 }
