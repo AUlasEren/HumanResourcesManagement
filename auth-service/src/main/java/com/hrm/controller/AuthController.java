@@ -35,6 +35,12 @@ public class AuthController {
     public ResponseEntity<String> login(UserLoginDto dto){
         return ResponseEntity.ok(authService.login(dto));
     }
+
+    @PutMapping(FORGOTPASSWORD)
+    public ResponseEntity<Boolean> forgotPassword(String email){
+        return ResponseEntity.ok(authService.forgotPassword(email));
+    }
+
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/getrolefromtoken")
     public ResponseEntity<String> getRoleFromToken(String token){
