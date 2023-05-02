@@ -104,6 +104,14 @@ public class AuthService extends ServiceManager<Auth, Long> {
         mailProducer.sendNewMail(MailModel.builder().activationCode(auth.getActivationCode()).email(auth.getEmail()).build());
         return true;
     }
+
+    public Boolean forgotPassword(String email) {
+        if (authRepository.findOptionalByEmail(email).isEmpty())
+            throw new AuthServiceException(ErrorType.EMAIL_NOT_FOUND);
+        Optional<Auth> auth = authRepository.findOptionalByEmail(email);
+        mailProducer.sendNewMail(MailModel.builder().activationCode(auth.get().getActivationCode()).email(auth.get().getEmail()).build());
+        return true;
+    }
 }
 
 

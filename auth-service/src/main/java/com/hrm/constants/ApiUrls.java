@@ -17,4 +17,5 @@ public class ApiUrls {
     public static final String REGISTER = "/register";
     public static final String LOGIN = "/login";
     public static final String DOLOGIN = "/dologin";
+    public static final String FORGOTPASSWORD = "/forgotpassword";
 }
