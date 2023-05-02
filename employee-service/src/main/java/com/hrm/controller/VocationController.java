@@ -36,9 +36,9 @@ public class VocationController {
     }
 
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
-    @GetMapping("/findallpending")
-    public ResponseEntity<List<Vocation>> findAllPendingVocation() {
-        return ResponseEntity.ok(vocationService.findAllPending());
+    @GetMapping(FINDALLVOCATIONPENDING)
+    public ResponseEntity<List<Vocation>> findAllVocationPending() {
+        return ResponseEntity.ok(vocationService.findAllVocationPending());
     }
 
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")

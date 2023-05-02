@@ -1,6 +1,6 @@
 package com.hrm.repository.entity;
 
-import com.hrm.repository.enums.EVocationStatus;
+import com.hrm.repository.enums.EStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import nonapi.io.github.classgraph.json.Id;
@@ -18,13 +18,13 @@ import java.time.LocalDate;
 public class Vocation extends BaseEntity{
     @Id
     private String id;
+    private String employeeId;
     private String vocationType;
     @Builder.Default
-    private EVocationStatus vocationStatus=EVocationStatus.PENDING;
+    private EStatus vocationStatus= EStatus.PENDING;
     private String companyManagerId;
-    private String employeeId;
     private LocalDate startOfVocationDate;
     private LocalDate endOfVocationDate;
-    private LocalDate responseOfRequestDate;
+    private LocalDate responseOfVocationRequestDate;
     private long vocationDuration;
 }

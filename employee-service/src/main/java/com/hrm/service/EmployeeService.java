@@ -8,8 +8,10 @@ import com.hrm.exception.ErrorType;
 import com.hrm.mapper.IEmployeeMapper;
 import com.hrm.rabbitmq.producer.RegisterEmployeeProducer;
 import com.hrm.repository.IEmployeeRepository;
+import com.hrm.repository.IVocationRepository;
 import com.hrm.repository.entity.Employee;
-import com.hrm.repository.enums.EStatus;
+import com.hrm.repository.entity.Vocation;
+import com.hrm.repository.enums.EEmployeeStatus;
 import com.hrm.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +24,13 @@ public class EmployeeService extends ServiceManager<Employee, String> {
     private final IEmployeeRepository employeeRepository;
     private final RegisterEmployeeProducer registerEmployeeProducer;
 
-    public EmployeeService(IEmployeeRepository employeeRepository, RegisterEmployeeProducer registerEmployeeProducer) {
+    private final IVocationRepository vocationRepository;
+
+    public EmployeeService(IEmployeeRepository employeeRepository, RegisterEmployeeProducer registerEmployeeProducer, IVocationRepository vocationRepository) {
         super(employeeRepository);
         this.employeeRepository = employeeRepository;
         this.registerEmployeeProducer = registerEmployeeProducer;
+        this.vocationRepository = vocationRepository;
     }
 
     public Boolean createEmployee(NewCreateEmployeeRequestDto dto) {
@@ -53,7 +58,7 @@ public class EmployeeService extends ServiceManager<Employee, String> {
         Optional<Employee> employee = findById(id);
         if (employee.isEmpty())
             throw new EmployeeServiceException(ErrorType.ID_NOT_FOUND);
-        employee.get().setStatus(EStatus.DELETED);
+        employee.get().setStatus(EEmployeeStatus.DELETED);
         update(employee.get());
         return true;
     }
@@ -65,5 +70,12 @@ public class EmployeeService extends ServiceManager<Employee, String> {
             employeeDetailResponseDtoList.add(IEmployeeMapper.INSTANCE.toEmployeeDetailResponseDto(x));
         });
         return employeeDetailResponseDtoList;
+    }
+
+    public List<Vocation> findAllVocationBtEmployeeId(String id) {
+        Optional<List<Vocation>> vocationList = vocationRepository.findAllByEmployeeId(id);
+        if(vocationList.isEmpty())
+            throw new EmployeeServiceException(ErrorType.VOCATION_NOT_REQUESTED);
+        return vocationList.get();
     }
 }
