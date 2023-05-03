@@ -6,7 +6,6 @@ public class ApiUrls {
     public static final String VOCATION= VERSION+"/vocation";
     public static final String EXPENSE= VERSION+"/expense";
     public static final String ADVANCE= VERSION+"/advance";
-    public static final String ACTIVATESTATUS="/activatestatus";
     public static final String CREATE ="/create";
     public static final String SAVE = "/save";
     public static final String UPDATE = "/update";
@@ -23,11 +22,6 @@ public class ApiUrls {
     public static final String FINDALLADVANCEPENDING = "/findalladvancepending";
     public static final String FINDALLEXPENSEPENDING = "/findallexpensepending";
     public static final String FINDALLBYDETAIL = "/findallbydetail";
-    public static final String FINDBYROLE = "/findbyrole";
     public static final String FINDBYID = "/findbyid";
-    public static final String GETBYAD = "/getbyad";
-    public static final String REGISTER = "/register";
-    public static final String LOGIN = "/login";
-    public static final String DOLOGIN = "/dologin";
     public static final String FINDALLVOCATIONBYEMPLOYEEID = "/findaddvocationbyemployeeid";
 }

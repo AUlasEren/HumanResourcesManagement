@@ -63,7 +63,6 @@ public class AuthService extends ServiceManager<Auth, Long> {
     public Boolean createAdminWithRabbitMq(RegisterAdminModel model) {
         if (authRepository.findOptionalByEmail(model.getEmail()).isPresent())
             throw new AuthServiceException(ErrorType.EMAIL_DUPLICATE);
-        //Auth auth = IAuthMapper.INSTANCE.toAuth(model);
         Auth auth = Auth.builder().email(model.getEmail()).build();
         String code = CodeGenerator.generateCode();
         String role = "ADMIN";
@@ -78,7 +77,6 @@ public class AuthService extends ServiceManager<Auth, Long> {
     public Boolean createCompanyManagerWithRabbitMq(RegisterCompanyManagerModel model) {
         if (authRepository.findOptionalByEmail(model.getEmail()).isPresent())
             throw new AuthServiceException(ErrorType.EMAIL_DUPLICATE);
-        //Auth auth = IAuthMapper.INSTANCE.toAuth(model);
         Auth auth = Auth.builder().email(model.getEmail()).build();
         String code = CodeGenerator.generateCode();
         String role = "COMPANY_MANAGER";
@@ -93,7 +91,6 @@ public class AuthService extends ServiceManager<Auth, Long> {
     public Boolean createEmployeeWithRabbitMq(RegisterEmployeeModel model) {
         if (authRepository.findOptionalByEmail(model.getEmail()).isPresent())
             throw new AuthServiceException(ErrorType.EMAIL_DUPLICATE);
-        //Auth auth = IAuthMapper.INSTANCE.toAuth(model);
         Auth auth = Auth.builder().email(model.getEmail()).build();
         String code = CodeGenerator.generateCode();
         String role = "EMPLOYEE";

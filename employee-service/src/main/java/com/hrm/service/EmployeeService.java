@@ -37,7 +37,6 @@ public class EmployeeService extends ServiceManager<Employee, String> {
         if (employeeRepository.findOptionalByEmail(dto.getEmail()).isPresent())
             throw new EmployeeServiceException(ErrorType.EMAIL_DUPLICATE);
        Employee employe = save(IEmployeeMapper.INSTANCE.toEmployee(dto));
-        // bu kaydı rabbitle autha göndereceğiz.
         registerEmployeeProducer.sendNewEmployee(IEmployeeMapper.INSTANCE.toModel(employe));
         return true;
     }

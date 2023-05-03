@@ -26,16 +26,19 @@ public class AdminController {
     }
 
     @GetMapping(FINDALL)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<Admin>> findAllAdmin() {
         return ResponseEntity.ok(adminService.findAll());
     }
 
     @PutMapping(UPDATE)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Boolean> updateAdmin(UpdateAdminRequestDto dto) {
         return ResponseEntity.ok(adminService.updateAdmin(dto));
     }
 
     @DeleteMapping(DELETEBYID)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Boolean> deleteAdmin(String id) {
         return ResponseEntity.ok(adminService.delete(id));
     }

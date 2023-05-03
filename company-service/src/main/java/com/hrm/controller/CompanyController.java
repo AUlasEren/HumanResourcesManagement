@@ -2,7 +2,6 @@ package com.hrm.controller;
 
 import static com.hrm.constant.ApiUrls.*;
 
-import com.hrm.dto.response.CompanyDetailResponseDto;
 import com.hrm.dto.response.CreateResponseDto;
 import com.hrm.dto.response.UpdateResponseDto;
 import com.hrm.repository.entity.Company;

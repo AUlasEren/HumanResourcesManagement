@@ -17,8 +17,8 @@ public enum ErrorType {
     IDENTIFICATIONNUMBER_DUPLICATE(4004,"IdentificationNumber is already exist",HttpStatus.BAD_REQUEST),
     USER_NOT_CREATED(4005,"User not created",HttpStatus.BAD_REQUEST ),
     INVALID_TOKEN(5001,"Token not created",HttpStatus.BAD_REQUEST),
-    INTERNAL_ERROR(5100,"Sunucu Hatası",HttpStatus.INTERNAL_SERVER_ERROR),
-    BAD_REQUEST(4100,"Parametre Hatası",HttpStatus.BAD_REQUEST),
+    INTERNAL_ERROR(5100,"Internal Error",HttpStatus.INTERNAL_SERVER_ERROR),
+    BAD_REQUEST(4100,"Parameter Error",HttpStatus.BAD_REQUEST),
 
 
     ;

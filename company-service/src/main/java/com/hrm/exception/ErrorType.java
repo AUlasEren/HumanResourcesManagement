@@ -18,8 +18,8 @@ public enum ErrorType {
     EMAIL_DUPLICATE(4005,"E-mail is already exist",HttpStatus.BAD_REQUEST),
     COMPANY_NOT_FOUND(4006,"Company is not found",HttpStatus.BAD_REQUEST),
     INVALID_TOKEN(5001,"Token not created",HttpStatus.BAD_REQUEST),
-    INTERNAL_ERROR(5100,"Sunucu Hatası",HttpStatus.INTERNAL_SERVER_ERROR),
-    BAD_REQUEST(4100,"Parametre Hatası",HttpStatus.BAD_REQUEST),
+    INTERNAL_ERROR(5100,"Eternal Error",HttpStatus.INTERNAL_SERVER_ERROR),
+    BAD_REQUEST(4100,"Parameter Error",HttpStatus.BAD_REQUEST),
 
     ;
 

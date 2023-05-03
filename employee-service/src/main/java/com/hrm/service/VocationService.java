@@ -39,8 +39,6 @@ public class VocationService extends ServiceManager<Vocation, String> {
         long daysBetween = ChronoUnit.DAYS.between(dto.getStartOfVocationDate(),dto.getEndOfVocationDate());
         vocation.setVocationDuration(daysBetween);
         save(vocation);
-        // bu kaydı rabbitle autha göndereceğiz.
-      //  registerEmployeeProducer.sendNewEmployee(IEmployeeMapper.INSTANCE.toModel(employe));
         return true;
     }
 
