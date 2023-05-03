@@ -6,6 +6,7 @@ import com.hrm.exception.ErrorType;
 import com.hrm.mapper.IExpenseMapper;
 import com.hrm.repository.IEmployeeRepository;
 import com.hrm.repository.IExpenseRepository;
+import com.hrm.repository.entity.Advance;
 import com.hrm.repository.entity.Expense;
 import com.hrm.repository.entity.Vocation;
 import com.hrm.repository.enums.EStatus;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,5 +76,33 @@ public class ExpenseService extends ServiceManager<Expense, String> {
         expense.get().setResponseDateOfExpenseRequest(LocalDate.now());
         update(expense.get());
         return true;
+    }
+
+    public List<Expense> sortingList(){
+        List<Expense> expenseList = findAll();
+        List<Expense> sortedList = sortByFifo(expenseList);
+        return sortedList;
+    }
+
+    public List<Expense> sortByFifo(List<Expense> expenseList){
+        expenseList.sort(Comparator.comparing(Expense::getCreateDate));
+        expenseList.sort(Comparator.comparing(Expense::getCreateDate));
+        List<Expense> sortedList = new ArrayList<>();
+        for (Expense expense : expenseList) {
+            if (expense.getExpenseStatus() == EStatus.PENDING) {
+                sortedList.add(expense);
+            }
+        }
+        for (Expense expense : expenseList) {
+            if (expense.getExpenseStatus() == EStatus.ACCEPT) {
+                sortedList.add(expense);
+            }
+        }
+        for (Expense expense : expenseList) {
+            if (expense.getExpenseStatus() == EStatus.REJECT) {
+                sortedList.add(expense);
+            }
+        }
+        return sortedList;
     }
 }

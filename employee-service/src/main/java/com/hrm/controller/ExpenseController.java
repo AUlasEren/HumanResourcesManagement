@@ -2,6 +2,7 @@ package com.hrm.controller;
 
 import com.hrm.dto.request.NewCreateEmployeeRequestDto;
 import com.hrm.dto.request.NewCreateExpenseRequestDto;
+import com.hrm.repository.entity.Advance;
 import com.hrm.repository.entity.Expense;
 import com.hrm.repository.entity.Vocation;
 import com.hrm.service.ExpenseService;
@@ -48,6 +49,12 @@ public class ExpenseController {
     @PutMapping(REJECTEXPENSEREQUEST)
     public ResponseEntity<Boolean> rejectExpenseRequest(String id){
         return ResponseEntity.ok(expenseService.rejectExpenseRequest(id));
+    }
+
+    @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
+    @GetMapping(FINDALLBYSORT)
+    public ResponseEntity<List<Expense>> sortedList(){
+        return ResponseEntity.ok(expenseService.sortingList());
     }
 
 
