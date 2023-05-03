@@ -52,6 +52,11 @@ public class VocationController {
     public ResponseEntity<Boolean> rejectVocationRequest(String id){
         return ResponseEntity.ok(vocationService.rejectVocationRequest(id));
     }
+    @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
+    @GetMapping(FINDALLBYSORT)
+    public ResponseEntity<List<Vocation>> sortedList(){
+        return ResponseEntity.ok(vocationService.sortingList());
+    }
 
 
 }

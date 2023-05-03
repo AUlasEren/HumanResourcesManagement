@@ -4,6 +4,7 @@ import com.hrm.dto.request.NewCreateAdvanceRequestDto;
 import com.hrm.dto.request.NewCreateExpenseRequestDto;
 import com.hrm.repository.entity.Advance;
 import com.hrm.repository.entity.Expense;
+import com.hrm.repository.entity.Vocation;
 import com.hrm.service.AdvanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,12 @@ public class AdvanceController {
     @PutMapping(REJECTADVANCEREQUEST)
     public ResponseEntity<Boolean> rejectAdvanceRequest(String id){
         return ResponseEntity.ok(advanceService.rejectAdvanceRequest(id));
+    }
+
+    @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
+    @GetMapping(FINDALLBYSORT)
+    public ResponseEntity<List<Advance>> sortedList(){
+        return ResponseEntity.ok(advanceService.sortingList());
     }
 
 

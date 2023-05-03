@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,5 +76,33 @@ public class VocationService extends ServiceManager<Vocation, String> {
         vocation.get().setResponseOfVocationRequestDate(LocalDate.now());
         update(vocation.get());
         return true;
+    }
+
+    public List<Vocation> sortingList(){
+        List<Vocation> vocationList = findAll();
+        List<Vocation> sortedList = sortByFifo(vocationList);
+        return sortedList;
+    }
+
+    public List<Vocation> sortByFifo(List<Vocation> vocationList){
+        vocationList.sort(Comparator.comparing(Vocation::getCreateDate));
+        vocationList.sort(Comparator.comparing(Vocation::getCreateDate));
+        List<Vocation> sortedList = new ArrayList<>();
+        for (Vocation vocation : vocationList) {
+            if (vocation.getVocationStatus() == EStatus.PENDING) {
+                sortedList.add(vocation);
+            }
+        }
+        for (Vocation vocation : vocationList) {
+            if (vocation.getVocationStatus() == EStatus.ACCEPT) {
+                sortedList.add(vocation);
+            }
+        }
+        for (Vocation vocation : vocationList) {
+            if (vocation.getVocationStatus() == EStatus.REJECT) {
+                sortedList.add(vocation);
+            }
+        }
+        return sortedList;
     }
 }
