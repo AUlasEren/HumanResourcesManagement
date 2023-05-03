@@ -36,7 +36,9 @@ public class EmployeeService extends ServiceManager<Employee, String> {
     public Boolean createEmployee(NewCreateEmployeeRequestDto dto) {
         if (employeeRepository.findOptionalByEmail(dto.getEmail()).isPresent())
             throw new EmployeeServiceException(ErrorType.EMAIL_DUPLICATE);
-       Employee employe = save(IEmployeeMapper.INSTANCE.toEmployee(dto));
+       Employee employe = IEmployeeMapper.INSTANCE.toEmployee(dto);
+        employe.setBirthDate(employe.getBirthDate().plusDays(1));
+        save(employe);
         registerEmployeeProducer.sendNewEmployee(IEmployeeMapper.INSTANCE.toModel(employe));
         return true;
     }

@@ -4,10 +4,7 @@ import com.hrm.repository.enums.EStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -34,6 +31,7 @@ public class Company extends BaseEntity{
     private String foundationYear;
     private LocalDate contractStartDate;
     private LocalDate contractFinishDate;
+    @Enumerated(EnumType.STRING)
     @Builder.Default
     private EStatus status=EStatus.ACTIVE;
 }

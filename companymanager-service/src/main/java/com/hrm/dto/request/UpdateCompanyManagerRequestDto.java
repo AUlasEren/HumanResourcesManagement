@@ -20,7 +20,7 @@ public class UpdateCompanyManagerRequestDto {
     private String image;
     @Email
     private String email;
-    @Size(min=10,max=250,message = "Text size exceeded")
+    @Size(min=5,max=250,message = "Text size exceeded")
     private String address;
     @Pattern(regexp = "^+(?:[0-9] ?){6,14}[0-9]$", message = "Phone number not valid.")
     private String phoneNumber;

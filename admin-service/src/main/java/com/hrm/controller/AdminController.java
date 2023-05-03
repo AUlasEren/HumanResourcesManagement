@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.hrm.constants.ApiUrls.*;
@@ -21,7 +22,7 @@ public class AdminController {
 
     @PostMapping(CREATE)
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Boolean> createAdmin(@RequestBody NewCreateAdminRequestDto dto) {
+    public ResponseEntity<Boolean> createAdmin(@RequestBody @Valid NewCreateAdminRequestDto dto) {
         return ResponseEntity.ok(adminService.createAdmin(dto));
     }
 
@@ -33,13 +34,13 @@ public class AdminController {
 
     @PutMapping(UPDATE)
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Boolean> updateAdmin(UpdateAdminRequestDto dto) {
+    public ResponseEntity<Boolean> updateAdmin(@RequestBody @Valid UpdateAdminRequestDto dto) {
         return ResponseEntity.ok(adminService.updateAdmin(dto));
     }
 
     @DeleteMapping(DELETEBYID)
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Boolean> deleteAdmin(String id) {
+    public ResponseEntity<Boolean> deleteAdmin(@RequestParam String id) {
         return ResponseEntity.ok(adminService.delete(id));
     }
 }

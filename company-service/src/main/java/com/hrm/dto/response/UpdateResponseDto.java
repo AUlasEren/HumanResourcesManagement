@@ -24,7 +24,7 @@ public class UpdateResponseDto {
     private String TaxAdministration;
     private String image;
     private String phoneNumber;
-    @Size(min=10,max=250,message = "Text size exceeded")
+    @Size(min=5,max=250,message = "Text size exceeded")
     private String address;
     @Email
     private String email;

@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 public class UpdateEmployeeRequestDto {
     private String id;
     private String image;
-    @Size(min=10,max=250,message = "Text size exceeded")
+    @Size(min=5,max=250,message = "Text size exceeded")
     private String address;
     @Pattern(regexp = "^+(?:[0-9] ?){6,14}[0-9]$", message = "Phone number not valid.")
     private String phoneNumber;
