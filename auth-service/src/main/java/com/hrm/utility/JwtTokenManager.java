@@ -7,7 +7,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.hrm.exception.AuthServiceException;
 import com.hrm.exception.ErrorType;
 import com.hrm.repository.entity.Auth;
-import com.hrm.repository.enums.ERole;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

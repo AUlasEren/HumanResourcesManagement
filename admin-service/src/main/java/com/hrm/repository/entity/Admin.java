@@ -19,7 +19,7 @@ public class Admin extends BaseEntity {
     @Id
     private String id;
     private Long authId;
-//    private Long companyId;
+
     private String activationCode;
     private String image;
     private String name;
@@ -34,6 +34,5 @@ public class Admin extends BaseEntity {
     private String phoneNumber;
     @Builder.Default
     private EStatus status = EStatus.ACTIVE;
-    //auth DAN KAYIT OLDKTAN SONRA BU BILGILERIN YAZILACAGI SAYFAYA YONLENDIR.
 
 }

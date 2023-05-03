@@ -28,6 +28,7 @@ public class CompanyManagerController {
     }
 
     @GetMapping(FINDALL)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<CompanyManager>> findAllAdmin() {
         return ResponseEntity.ok(companyManagerService.findAll());
     }

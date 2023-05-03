@@ -1,10 +1,13 @@
 package com.hrm.dto.response;
 
 import com.hrm.repository.enums.EStatus;
-import lombok.Builder;
-
+import lombok.*;
 import java.time.LocalDate;
 
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CompanyDetailResponseDto {
     private String companyName;
     private String title;

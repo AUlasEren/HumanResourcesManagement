@@ -26,38 +26,39 @@ import static com.hrm.constants.ApiUrls.*;
 public class AuthController {
     private final JwtTokenManager jwtTokenManager;
     private final AuthService authService;
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(REGISTER)
-    public ResponseEntity<RegisterResponseDto> register(@RequestBody @Valid NewRegisterRequestDto dto){
+    public ResponseEntity<RegisterResponseDto> register(@RequestBody @Valid NewRegisterRequestDto dto) {
         return ResponseEntity.ok(authService.register(dto));
     }
+
     @GetMapping(LOGIN)
-    public ResponseEntity<String> login(UserLoginDto dto){
+    public ResponseEntity<String> login(UserLoginDto dto) {
         return ResponseEntity.ok(authService.login(dto));
     }
 
     @PutMapping(FORGOTPASSWORD)
-    public ResponseEntity<Boolean> forgotPassword(String email){
+    public ResponseEntity<Boolean> forgotPassword(String email) {
         return ResponseEntity.ok(authService.forgotPassword(email));
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    @GetMapping("/getrolefromtoken")
-    public ResponseEntity<String> getRoleFromToken(String token){
+    @GetMapping(GETROLEFROMTOKEN)
+    public ResponseEntity<String> getRoleFromToken(String token) {
         return ResponseEntity.ok(jwtTokenManager.getRoleFromToken(token).get());
     }
-    @GetMapping("/getidfromtoken")
-    public ResponseEntity<Long> createIdFromToken(String token){
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping(GETIDFROMTOKEN)
+    public ResponseEntity<Long> getIdFromToken(String token) {
         return ResponseEntity.ok(jwtTokenManager.getIdFromToken(token).get());
     }
+
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping(FINDALL)
-    public ResponseEntity<List<Auth>> findAll(){
+    public ResponseEntity<List<Auth>> findAll() {
         return ResponseEntity.ok(authService.findAll());
     }
-
-
-
-
 
 }
