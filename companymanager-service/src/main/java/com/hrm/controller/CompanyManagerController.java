@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class CompanyManagerController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(CREATE)
-    public ResponseEntity<Boolean> createCompanyManager(@RequestBody NewCreateCompanyManagerRequestDto dto) {
+    public ResponseEntity<Boolean> createCompanyManager(@RequestBody @Valid NewCreateCompanyManagerRequestDto dto) {
         return ResponseEntity.ok(companyManagerService.createCompanyManager(dto));
     }
 
@@ -34,17 +35,17 @@ public class CompanyManagerController {
     }
 
     @PutMapping(UPDATE)
-    public ResponseEntity<Boolean> updateCompanyManager(UpdateCompanyManagerRequestDto dto) {
+    public ResponseEntity<Boolean> updateCompanyManager(@RequestBody @Valid UpdateCompanyManagerRequestDto dto) {
         return ResponseEntity.ok(companyManagerService.updateCompanyManager(dto));
     }
 
     @DeleteMapping(DELETEBYID)
-    public ResponseEntity<Boolean> deleteCompanyManager(String id) {
+    public ResponseEntity<Boolean> deleteCompanyManager(@RequestParam String id) {
         return ResponseEntity.ok(companyManagerService.delete(id));
     }
 
     @GetMapping(FINDBYID)
-    public ResponseEntity<Optional<CompanyManager>> findById(String id){
+    public ResponseEntity<Optional<CompanyManager>> findById(@RequestParam String id){
         return ResponseEntity.ok(companyManagerService.findById(id));
     }
 

@@ -31,7 +31,9 @@ public class CompanyManagerService extends ServiceManager<CompanyManager, String
     public Boolean createCompanyManager(NewCreateCompanyManagerRequestDto dto) {
         if (companyManagerRepository.findOptionalByEmail(dto.getEmail()).isPresent())
             throw new CompanyManagerServiceException(ErrorType.EMAIL_DUPLICATE);
-        CompanyManager companyManager = save(ICompanyManagerMapper.INSTANCE.toCompanyManager(dto));
+        CompanyManager companyManager = ICompanyManagerMapper.INSTANCE.toCompanyManager(dto);
+        companyManager.setBirthDate(companyManager.getBirthDate().plusDays(1));
+        save(companyManager);
         registerCompanyManagerProducer.sendNewCompanyManager(ICompanyManagerMapper.INSTANCE.toModel(companyManager));
         return true;
     }

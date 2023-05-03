@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.hrm.constants.ApiUrls.*;
@@ -23,9 +24,9 @@ public class VocationController {
 
     private final VocationService vocationService;
 
-    @PreAuthorize("hasAuthority('EMPLOYEE') and hasAuthority('COMPANY_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('EMPLOYEE', 'COMPANY_MANAGER')")
     @PostMapping(CREATE)
-    public ResponseEntity<Boolean> createVocation(@RequestBody NewCreateVocationRequestDto dto) {
+    public ResponseEntity<Boolean> createVocation(@RequestBody @Valid NewCreateVocationRequestDto dto) {
         return ResponseEntity.ok(vocationService.createVocation(dto));
     }
 
@@ -43,13 +44,13 @@ public class VocationController {
 
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @PutMapping(APPROVEVOCATIONREQUEST)
-    public ResponseEntity<Boolean> aprroveVocationRequest(String id){
+    public ResponseEntity<Boolean> aprroveVocationRequest(@RequestParam String id){
         return ResponseEntity.ok(vocationService.aprroveVocationRequest(id));
     }
 
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @PutMapping(REJECTVOCATIONREQUEST)
-    public ResponseEntity<Boolean> rejectVocationRequest(String id){
+    public ResponseEntity<Boolean> rejectVocationRequest(@RequestParam String id){
         return ResponseEntity.ok(vocationService.rejectVocationRequest(id));
     }
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")

@@ -37,7 +37,10 @@ public class VocationService extends ServiceManager<Vocation, String> {
             throw new EmployeeServiceException(ErrorType.VOCATION_NOT_CREATED);
         Vocation vocation = IVocationMapper.INSTANCE.toVocation(dto);
         long daysBetween = ChronoUnit.DAYS.between(dto.getStartOfVocationDate(),dto.getEndOfVocationDate());
+        if(daysBetween<0)throw new EmployeeServiceException(ErrorType.VOCATION_DURATION_NOT_BE_MINUS);
         vocation.setVocationDuration(daysBetween);
+        vocation.setStartOfVocationDate(vocation.getStartOfVocationDate().plusDays(1));
+        vocation.setEndOfVocationDate(vocation.getEndOfVocationDate().plusDays(1));
         save(vocation);
         return true;
     }

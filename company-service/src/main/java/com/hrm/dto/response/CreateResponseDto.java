@@ -26,7 +26,7 @@ public class CreateResponseDto {
     private String image;
     @Pattern(regexp = "^+(?:[0-9] ?){6,14}[0-9]$", message = "Phone number not valid.")
     private String phoneNumber;
-    @Size(min=10,max=250,message = "Text size exceeded")
+    @Size(min=5,max=250,message = "Text size exceeded")
     private String address;
     @Email
     private String email;

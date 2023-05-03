@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.hrm.constants.ApiUrls.*;
@@ -23,8 +24,8 @@ public class ExpenseController {
     private final ExpenseService expenseService;
 
     @PostMapping(CREATE)
-    @PreAuthorize("hasAuthority('EMPLOYEE') and hasAuthority('COMPANY_MANAGER')")
-    public ResponseEntity<Boolean> createExpense(@RequestBody NewCreateExpenseRequestDto dto) {
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'COMPANY_MANAGER')")
+    public ResponseEntity<Boolean> createExpense(@RequestBody @Valid NewCreateExpenseRequestDto dto) {
         return ResponseEntity.ok(expenseService.createExpense(dto));
     }
 
@@ -42,13 +43,13 @@ public class ExpenseController {
 
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @PutMapping(APPROVEEXPENSEREQUEST)
-    public ResponseEntity<Boolean> aprroveExpenseRequest(String id){
+    public ResponseEntity<Boolean> aprroveExpenseRequest(@RequestParam String id){
         return ResponseEntity.ok(expenseService.aprroveExpenseRequest(id));
     }
 
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @PutMapping(REJECTEXPENSEREQUEST)
-    public ResponseEntity<Boolean> rejectExpenseRequest(String id){
+    public ResponseEntity<Boolean> rejectExpenseRequest(@RequestParam String id){
         return ResponseEntity.ok(expenseService.rejectExpenseRequest(id));
     }
 

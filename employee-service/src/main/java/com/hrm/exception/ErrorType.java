@@ -18,6 +18,7 @@ public enum ErrorType {
     USER_NOT_CREATED(4005,"User not created",HttpStatus.BAD_REQUEST ),
     VOCATION_NOT_CREATED(3001,"Vocation not created",HttpStatus.BAD_REQUEST ),
     VOCATION_NOT_VALID(3002,"Vocation not valid",HttpStatus.BAD_REQUEST ),
+    VOCATION_DURATION_NOT_BE_MINUS(3004,"Vocation not be valid",HttpStatus.BAD_REQUEST ),
     VOCATION_NOT_REQUESTED(3003,"You don't have any vocation request",HttpStatus.BAD_REQUEST ),
     ADVANCE_NOT_VALID(7001,"Advance not valid",HttpStatus.BAD_REQUEST ),
     AMOUNT_NOT_VALIABLE(7002,"Amount not valiable",HttpStatus.BAD_REQUEST ),

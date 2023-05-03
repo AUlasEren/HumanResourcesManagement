@@ -18,18 +18,18 @@ public class NewCreateEmployeeRequestDto {
     private Long companyId;
     @Pattern(regexp = "^[a-zA-Z]+$", message = "Name and Surname must be letters only.")
     private String name;
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "Name and Surname must be letters only.")
     private String secondName;
     @Pattern(regexp = "^[a-zA-Z]+$", message = "Name and Surname must be letters only.")
     private String lastName;
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "Name and Surname must be letters only.")
+
     private String secondLastName;
     private LocalDate birthDate;
     private String placeOfBirth;
-    private Long identificationNumber;
+    @Pattern(regexp = "^[1-9]{1}[0-9]{9}[0,2,4,6,8]{1}$", message = "Identifiacation number not valid.")
+    private String identificationNumber;
     @Email
     private String email;
-    @Size(min=10,max=250,message = "Text size exceeded")
+    @Size(min=5,max=250,message = "Text size exceeded")
     private String address;
     @Pattern(regexp = "^+(?:[0-9] ?){6,14}[0-9]$", message = "Phone number not valid.")
     private String phoneNumber;

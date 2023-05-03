@@ -21,25 +21,25 @@ public class CompanyController {
     private final CompanyService companyService;
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(CREATE)
-    public ResponseEntity<Boolean> createCompany(@RequestBody CreateResponseDto dto) {
+    public ResponseEntity<Boolean> createCompany(@RequestBody @Valid CreateResponseDto dto) {
         return ResponseEntity.ok(companyService.createCompany(dto));
     }
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping(UPDATE)
-    public ResponseEntity<Company> updateCompany(@RequestBody UpdateResponseDto dto){
+    public ResponseEntity<Company> updateCompany(@RequestBody @Valid UpdateResponseDto dto){
         return ResponseEntity.ok(companyService.updateCompany(dto));
     }
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping(DELETEBYID)
     public ResponseEntity<Boolean> deleteCompany(@RequestParam Long id){
         return ResponseEntity.ok(companyService.deleteCompany(id));
     }
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping(FINDALL)
     public ResponseEntity<List<Company>> findAll() {
         return ResponseEntity.ok(companyService.findAll());
     }
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping(DETAILINFO)
     public ResponseEntity<Company> detailInfo(@RequestParam Long id) {
         return ResponseEntity.ok(companyService.getDetailInfo(id));

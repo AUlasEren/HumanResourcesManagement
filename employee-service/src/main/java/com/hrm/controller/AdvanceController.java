@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.hrm.constants.ApiUrls.*;
@@ -23,7 +24,7 @@ public class AdvanceController {
     private final AdvanceService advanceService;
 
     @PostMapping(CREATE)
-    public ResponseEntity<Boolean> createAdvance(@RequestBody NewCreateAdvanceRequestDto dto) {
+    public ResponseEntity<Boolean> createAdvance(@RequestBody @Valid NewCreateAdvanceRequestDto dto) {
         return ResponseEntity.ok(advanceService.createAdvance(dto));
     }
 
@@ -41,13 +42,13 @@ public class AdvanceController {
 
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @PutMapping(APPROVEADVANCEREQUEST)
-    public ResponseEntity<Boolean> aprroveAdvanceRequest(String id){
+    public ResponseEntity<Boolean> aprroveAdvanceRequest(@RequestParam String id){
         return ResponseEntity.ok(advanceService.aprroveAdvanceRequest(id));
     }
 
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @PutMapping(REJECTADVANCEREQUEST)
-    public ResponseEntity<Boolean> rejectAdvanceRequest(String id){
+    public ResponseEntity<Boolean> rejectAdvanceRequest(@RequestParam String id){
         return ResponseEntity.ok(advanceService.rejectAdvanceRequest(id));
     }
 

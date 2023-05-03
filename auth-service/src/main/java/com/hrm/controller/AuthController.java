@@ -39,19 +39,19 @@ public class AuthController {
     }
 
     @PutMapping(FORGOTPASSWORD)
-    public ResponseEntity<Boolean> forgotPassword(String email) {
+    public ResponseEntity<Boolean> forgotPassword(@RequestParam String email) {
         return ResponseEntity.ok(authService.forgotPassword(email));
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping(GETROLEFROMTOKEN)
-    public ResponseEntity<String> getRoleFromToken(String token) {
+    public ResponseEntity<String> getRoleFromToken(@RequestParam String token) {
         return ResponseEntity.ok(jwtTokenManager.getRoleFromToken(token).get());
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping(GETIDFROMTOKEN)
-    public ResponseEntity<Long> getIdFromToken(String token) {
+    public ResponseEntity<Long> getIdFromToken(@RequestParam String token) {
         return ResponseEntity.ok(jwtTokenManager.getIdFromToken(token).get());
     }
 

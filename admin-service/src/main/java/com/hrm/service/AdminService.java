@@ -31,7 +31,9 @@ public class AdminService extends ServiceManager<Admin, String> {
     public Boolean createAdmin(NewCreateAdminRequestDto dto) {
         if (adminRepository.findOptionalByEmail(dto.getEmail()).isPresent())
             throw new AdminServiceException(ErrorType.EMAIL_DUPLICATE);
-        Admin admin = save(IAdminMapper.INSTANCE.toAdmin(dto));
+        Admin admin = IAdminMapper.INSTANCE.toAdmin(dto);
+        admin.setBirthDate(admin.getBirthDate().plusDays(1));
+        save(admin);
         registerAdminProducer.sendNewAdmin(IAdminMapper.INSTANCE.toRegisterAdminModel(admin));
         return true;
     }

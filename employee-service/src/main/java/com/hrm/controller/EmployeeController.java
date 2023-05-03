@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class EmployeeController {
 
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
     @PostMapping(CREATE)
-    public ResponseEntity<Boolean> createEmployee(@RequestBody NewCreateEmployeeRequestDto dto) {
+    public ResponseEntity<Boolean> createEmployee(@RequestBody @Valid NewCreateEmployeeRequestDto dto) {
         return ResponseEntity.ok(employeeService.createEmployee(dto));
     }
 
@@ -37,19 +38,19 @@ public class EmployeeController {
 
     @PutMapping(UPDATE)
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
-    public ResponseEntity<Boolean> updateEmployee(UpdateEmployeeRequestDto dto) {
+    public ResponseEntity<Boolean> updateEmployee(@RequestBody @Valid UpdateEmployeeRequestDto dto) {
         return ResponseEntity.ok(employeeService.updateEmployee(dto));
     }
 
     @DeleteMapping(DELETEBYID)
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
-    public ResponseEntity<Boolean> deleteEmployee(String id) {
+    public ResponseEntity<Boolean> deleteEmployee(@RequestParam String id) {
         return ResponseEntity.ok(employeeService.delete(id));
     }
 
     @GetMapping(FINDBYID)
     @PreAuthorize("hasAuthority('COMPANY_MANAGER')")
-    public ResponseEntity<Optional<Employee>> findById(String id){
+    public ResponseEntity<Optional<Employee>> findById(@RequestParam String id){
         return ResponseEntity.ok(employeeService.findById(id));
     }
 
@@ -60,8 +61,8 @@ public class EmployeeController {
     }
 
     @GetMapping(FINDALLVOCATIONBYEMPLOYEEID)
-    @PreAuthorize("hasAuthority('EMPLOYEE') and hasAuthority('COMPANY_MANAGER')")
-    public ResponseEntity<List<Vocation>> findAllVocationBtEmployeeId(String id){
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'COMPANY_MANAGER')")
+    public ResponseEntity<List<Vocation>> findAllVocationBtEmployeeId(@RequestParam String id){
         return ResponseEntity.ok(employeeService.findAllVocationBtEmployeeId(id));
     }
 
