@@ -46,7 +46,7 @@ public class JwtTokenManager {
                     .withIssuer(issuer) //jwtnin sahibi
                     .withIssuedAt(new Date()) // token oluşturulma tarihi
                     .withExpiresAt(date)
-                    .withClaim("id", auth.getId())
+                    .withClaim("id", auth.getUserId())
                     .withClaim("role", auth.getRole())
                     .sign(Algorithm.HMAC512(secretKey));
             return Optional.of(token);

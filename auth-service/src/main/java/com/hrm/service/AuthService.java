@@ -69,6 +69,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         auth.setActivationCode(code);
         auth.setPassword(code);
         auth.setRole(role);
+        auth.setUserId(model.getId());
         save(auth);
         mailProducer.sendNewMail(MailModel.builder().activationCode(auth.getActivationCode()).email(auth.getEmail()).build());
         return true;
@@ -83,6 +84,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         auth.setActivationCode(code);
         auth.setPassword(code);
         auth.setRole(role);
+        auth.setUserId(model.getId());
         save(auth);
         mailProducer.sendNewMail(MailModel.builder().activationCode(auth.getActivationCode()).email(auth.getEmail()).build());
         return true;
@@ -97,6 +99,7 @@ public class AuthService extends ServiceManager<Auth, Long> {
         auth.setActivationCode(code);
         auth.setPassword(code);
         auth.setRole(role);
+        auth.setUserId(model.getId());
         save(auth);
         mailProducer.sendNewMail(MailModel.builder().activationCode(auth.getActivationCode()).email(auth.getEmail()).build());
         return true;
