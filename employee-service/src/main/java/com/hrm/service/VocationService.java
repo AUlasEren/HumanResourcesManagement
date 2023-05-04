@@ -87,7 +87,6 @@ public class VocationService extends ServiceManager<Vocation, String> {
 
     public List<Vocation> sortByFifo(List<Vocation> vocationList){
         vocationList.sort(Comparator.comparing(Vocation::getCreateDate));
-        vocationList.sort(Comparator.comparing(Vocation::getCreateDate));
         List<Vocation> sortedList = new ArrayList<>();
         for (Vocation vocation : vocationList) {
             if (vocation.getVocationStatus() == EStatus.PENDING) {
