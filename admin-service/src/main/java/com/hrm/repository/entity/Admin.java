@@ -19,7 +19,6 @@ public class Admin extends BaseEntity {
     @Id
     private String id;
     private Long authId;
-
     private String activationCode;
     private String image;
     private String name;

@@ -13,10 +13,10 @@ import javax.persistence.*;
 @ToString
 @Entity
 public class Auth extends BaseEntity{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String userId;
     private String email;
     private String password;
     private String activationCode;

@@ -13,4 +13,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class RegisterCompanyManagerModel implements Serializable {
     private String email;
+    private String id;
 }
