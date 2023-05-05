@@ -15,6 +15,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,6 +28,8 @@ public class ExpenseService extends ServiceManager<Expense, String> {
 
     private final IExpenseRepository expenseRepository;
     private final IEmployeeRepository employeeRepository;
+
+
 
 
     public ExpenseService(IExpenseRepository expenseRepository, IEmployeeRepository employeeRepository) {
@@ -40,6 +44,9 @@ public class ExpenseService extends ServiceManager<Expense, String> {
         if (dto.getRequestDateOfExpense() == null || dto.getExpenseAmount() == 0)
             throw new EmployeeServiceException(ErrorType.AMOUND_NOT_NULL);
         Expense expense = IExpenseMapper.INSTANCE.toExpense(dto);
+        Path path = Path.of(dto.getPath());
+        File file = new File(path.toString());
+        expense.setFile(file);
         save(expense);
         return true;
     }
