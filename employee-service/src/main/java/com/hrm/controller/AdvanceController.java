@@ -1,10 +1,7 @@
 package com.hrm.controller;
 
 import com.hrm.dto.request.NewCreateAdvanceRequestDto;
-import com.hrm.dto.request.NewCreateExpenseRequestDto;
 import com.hrm.repository.entity.Advance;
-import com.hrm.repository.entity.Expense;
-import com.hrm.repository.entity.Vocation;
 import com.hrm.service.AdvanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
