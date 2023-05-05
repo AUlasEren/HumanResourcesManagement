@@ -24,7 +24,7 @@ public class ExpenseController {
     private final ExpenseService expenseService;
 
     @PostMapping(CREATE)
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'COMPANY_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('EMPLOYEE', 'COMPANY_MANAGER')")
     public ResponseEntity<Boolean> createExpense(@RequestBody @Valid NewCreateExpenseRequestDto dto) {
         return ResponseEntity.ok(expenseService.createExpense(dto));
     }
