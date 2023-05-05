@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.nio.file.Path;
 import java.time.LocalDate;
 
 @Data
@@ -19,5 +20,5 @@ public class NewCreateExpenseRequestDto {
     private Long expenseAmount;
     private String unitOfCurrency;
     private LocalDate requestDateOfExpense; // Harcama'nın yapılması planlanan tarih.
-
+    private String path;
 }

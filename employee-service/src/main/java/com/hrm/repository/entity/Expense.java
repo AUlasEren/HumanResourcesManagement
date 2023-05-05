@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.File;
 import java.time.LocalDate;
 
 @Data
@@ -29,6 +30,6 @@ public class Expense extends BaseEntity{
     private LocalDate requestDateOfExpense; // Harcama'nın yapılması planlanan tarih.
     private LocalDate responseDateOfExpenseRequest; //Cevaplanma tarihi
     //Harcama tablosu içeren excel dosyası eklenmesi..
-
+    private File file;
 
 }
